@@ -4,16 +4,16 @@ export const ListNavigationMain = [
   {
     name: 'Homepage',
     url: '/',
-    icon: <LayoutDashboard />,
+    icon: <LayoutDashboard size={18} />,
   },
   {
     name: 'Exchange',
     url: '/exchange',
-    icon: <ShoppingCart />,
+    icon: <ShoppingCart size={18} />,
   },
   {
     name: 'Market',
     url: '/market',
-    icon: <Store />,
+    icon: <Store size={18} />,
   },
 ]
