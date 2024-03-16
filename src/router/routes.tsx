@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 
 import RootLayout from '@/App'
-
+import { NotFound } from './loadables'
 
 export const router = createBrowserRouter([
   {
@@ -166,8 +166,8 @@ export const router = createBrowserRouter([
     //   },
     // ],
   },
-//   {
-//     path: '*',
-//     element: <NotFound />,
-//   },
+  {
+    path: '*',
+    element: <NotFound />,
+  },
 ])
