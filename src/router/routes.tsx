@@ -1,12 +1,26 @@
 import { createBrowserRouter } from 'react-router-dom'
 
 import RootLayout from '@/App'
-import { NotFound } from './loadables'
+import { Exchange, Homepage, Market, NotFound } from './loadables'
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
+    children: [
+      {
+        path: '',
+        element: <Homepage />,
+      },
+      {
+        path: 'exchange',
+        element: <Exchange />,
+      },
+      {
+        path: 'market',
+        element: <Market />,
+      },
+    ],
     // children: [
     //   {
     //     path: 'admisi',
