@@ -3,7 +3,6 @@ import { createBrowserRouter } from 'react-router-dom'
 import RootLayout from '@/App'
 
 
-
 export const router = createBrowserRouter([
   {
     path: '/',
