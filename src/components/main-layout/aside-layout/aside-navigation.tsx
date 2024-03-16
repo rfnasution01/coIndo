@@ -24,10 +24,11 @@ export function AsideNavigation({ show }: { show: boolean }) {
         <Link
           to={item?.url}
           className={clsx(
-            'flex items-center gap-x-16 rounded-lg border-l-2 border-transparent p-8 hover:border-primary-shade-1 hover:bg-primary-tint-1 hover:text-primary',
+            'flex items-center gap-x-16 rounded-lg border-l-2 px-8 py-12 hover:border-primary hover:bg-primary-tint-1 hover:text-primary',
             {
-              'border-primary-shade-1 bg-primary-tint-1 text-primary':
-                isPathnameOpen(item?.name),
+              'border-primary bg-primary-tint-1 text-primary': isPathnameOpen(
+                item?.name,
+              ),
               'border-transparent': !isPathnameOpen(item?.name),
             },
             {
