@@ -3,6 +3,8 @@ import {
   AsideHeader,
   AsideNavigation,
   AsideWallet,
+  HeaderBreadCrumb,
+  HeaderSetting,
 } from './components/main-layout'
 import { Outlet } from 'react-router-dom'
 
@@ -19,8 +21,14 @@ function App() {
         <AsideNavigation show={show} />
         <AsideWallet show={show} />
       </aside>
-      <div className="flex-1 ">
-        <Outlet />
+      <div className="flex flex-1 flex-col gap-y-32 px-32 py-64">
+        <header className="flex items-center justify-between">
+          <HeaderBreadCrumb />
+          <HeaderSetting />
+        </header>
+        <article className="flex-1 bg-red-300">
+          <Outlet />
+        </article>
       </div>
     </section>
   )
