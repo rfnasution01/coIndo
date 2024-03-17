@@ -24,6 +24,7 @@ export function CurrencyMapping({
 }) {
   const dispatch = useDispatch()
   const stateCurrency = useSelector(getCurrencySlice)
+
   const handleChangeCurrency = (
     symbol: string,
     currencySymbol: string,
