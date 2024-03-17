@@ -1,4 +1,5 @@
 import { Loading } from '@/components/Loading'
+import { NoData } from '@/components/NoData'
 import { convertSlugToText } from '@/lib/helpers/formatText'
 import { RatesType } from '@/lib/interfaces/ratesProps'
 import {
@@ -48,53 +49,57 @@ export function CurrencyMapping({
         <Loading />
       ) : (
         <div className="grid grid-cols-12 gap-24">
-          {rates.map((item, idx) => (
-            <div
-              className={clsx(
-                'col-span-3 flex items-center gap-x-16 rounded-xl p-16 hover:cursor-pointer hover:bg-primary-shade-1 hover:text-background',
-                {
-                  'bg-primary-shade-1 text-background':
-                    stateCurrency.symbol === item?.symbol,
-                },
-              )}
-              key={idx}
-              onClick={() =>
-                handleChangeCurrency(
-                  item?.symbol,
-                  item?.currencySymbol,
-                  Number(item?.rateUsd),
-                  item?.id,
-                )
-              }
-            >
+          {rates.length === 0 ? (
+            <NoData className="col-span-12" />
+          ) : (
+            rates.map((item, idx) => (
               <div
                 className={clsx(
-                  'flex h-48 w-48 items-center justify-center rounded-full',
+                  'col-span-3 flex items-center gap-x-16 rounded-xl p-16 hover:cursor-pointer hover:bg-primary-shade-1 hover:text-background',
                   {
-                    'bg-background text-primary-shade-1':
-                      stateCurrency.symbol === item?.symbol,
                     'bg-primary-shade-1 text-background':
-                      stateCurrency.symbol !== item?.symbol,
+                      stateCurrency.symbol === item?.symbol,
                   },
                 )}
+                key={idx}
+                onClick={() =>
+                  handleChangeCurrency(
+                    item?.symbol,
+                    item?.currencySymbol,
+                    Number(item?.rateUsd),
+                    item?.id,
+                  )
+                }
               >
-                <span className="font-roboto text-[1.6rem]">
-                  {item?.currencySymbol ?? <Gem size={16} />}
-                </span>
+                <div
+                  className={clsx(
+                    'flex h-48 w-48 items-center justify-center rounded-full',
+                    {
+                      'bg-background text-primary-shade-1':
+                        stateCurrency.symbol === item?.symbol,
+                      'bg-primary-shade-1 text-background':
+                        stateCurrency.symbol !== item?.symbol,
+                    },
+                  )}
+                >
+                  <span className="font-roboto text-[1.6rem]">
+                    {item?.currencySymbol ?? <Gem size={16} />}
+                  </span>
+                </div>
+                <div className="flex flex-1 flex-col gap-y-8">
+                  <h4 className="font-roboto text-[2rem] font-medium">
+                    {convertSlugToText(item?.id)}
+                  </h4>
+                  <h5>{item?.symbol}</h5>
+                </div>
+                {stateCurrency.symbol === item?.symbol && (
+                  <span className="flex h-32 w-32 items-center justify-center rounded-full bg-success-tint-2 text-black">
+                    <Check size={12} />
+                  </span>
+                )}
               </div>
-              <div className="flex flex-1 flex-col gap-y-8">
-                <h4 className="font-roboto text-[2rem] font-medium">
-                  {convertSlugToText(item?.id)}
-                </h4>
-                <h5>{item?.symbol}</h5>
-              </div>
-              {stateCurrency.symbol === item?.symbol && (
-                <span className="flex h-32 w-32 items-center justify-center rounded-full bg-success-tint-2 text-black">
-                  <Check size={12} />
-                </span>
-              )}
-            </div>
-          ))}
+            ))
+          )}
         </div>
       )}
     </div>
