@@ -1,38 +1,42 @@
 import { Loading } from '@/components/Loading'
 import { convertSlugToText } from '@/lib/helpers/formatText'
 import { RatesType } from '@/lib/interfaces/ratesProps'
+import {
+  StateCurrencyType,
+  getCurrencySlice,
+  setStateCurrency,
+} from '@/store/reducer/stateCurrency'
 import clsx from 'clsx'
 import { Check, Gem } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 export function CurrencyMapping({
   rates,
-  stateCurrency,
-  setStateCurrency,
   title,
   setIsOpen,
   isLoading,
 }: {
   rates: RatesType[]
-  stateCurrency: Record<string, string | undefined>
-  setStateCurrency: Dispatch<SetStateAction<Record<string, string | undefined>>>
   title: string
   setIsOpen: Dispatch<SetStateAction<boolean>>
   isLoading: boolean
 }) {
-  const handleClick = (
+  const dispatch = useDispatch()
+  const stateCurrency = useSelector(getCurrencySlice)
+  const handleChangeCurrency = (
     symbol: string,
     currencySymbol: string,
-    price: string,
+    price: number,
     id: string,
   ) => {
-    setStateCurrency((prevState) => ({
-      ...prevState,
+    const newCurrency: StateCurrencyType = {
       symbol: symbol,
       currencySymbol: currencySymbol,
       price: price,
       id: id,
-    }))
+    }
+    dispatch(setStateCurrency(newCurrency))
     setIsOpen(false)
   }
 
@@ -54,10 +58,10 @@ export function CurrencyMapping({
               )}
               key={idx}
               onClick={() =>
-                handleClick(
+                handleChangeCurrency(
                   item?.symbol,
                   item?.currencySymbol,
-                  item?.rateUsd,
+                  Number(item?.rateUsd),
                   item?.id,
                 )
               }

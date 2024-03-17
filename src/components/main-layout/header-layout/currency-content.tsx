@@ -4,12 +4,8 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { CurrencyMapping } from './currency-mapping'
 
 export function CurrencyContent({
-  stateCurrency,
-  setStateCurrency,
   setIsOpen,
 }: {
-  stateCurrency: Record<string, string | undefined>
-  setStateCurrency: Dispatch<SetStateAction<Record<string, string | undefined>>>
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }) {
   const [search, _setSearch] = useState<string | undefined>(undefined)
@@ -33,8 +29,6 @@ export function CurrencyContent({
           <CurrencyMapping
             title="Crypto Currency"
             rates={ratesCrypto}
-            stateCurrency={stateCurrency}
-            setStateCurrency={setStateCurrency}
             setIsOpen={setIsOpen}
             isLoading={isLoading}
           />
@@ -42,8 +36,6 @@ export function CurrencyContent({
           <CurrencyMapping
             title="Fiat Currency"
             rates={ratesFiat}
-            stateCurrency={stateCurrency}
-            setStateCurrency={setStateCurrency}
             setIsOpen={setIsOpen}
             isLoading={isLoading}
           />

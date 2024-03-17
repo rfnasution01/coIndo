@@ -2,17 +2,12 @@ import { DialogComponent } from '@/components/ui/dialog'
 import { ChevronDown } from 'lucide-react'
 import { useState } from 'react'
 import { CurrencyContent } from './currency-content'
+import { useSelector } from 'react-redux'
+import { getCurrencySlice } from '@/store/reducer/stateCurrency'
 
 export function HeaderSetting() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [stateCurrency, setStateCurrency] = useState<
-    Record<string, string | undefined>
-  >({
-    symbol: 'USD',
-    currencySymbol: '$',
-    price: '1',
-    id: 'united-states-dollar',
-  })
+  const stateCurrency = useSelector(getCurrencySlice)
 
   return (
     <>
@@ -27,13 +22,7 @@ export function HeaderSetting() {
         title="Pilih Currency"
         open={isOpen}
         setOpen={setIsOpen}
-        customComponent={
-          <CurrencyContent
-            stateCurrency={stateCurrency}
-            setStateCurrency={setStateCurrency}
-            setIsOpen={setIsOpen}
-          />
-        }
+        customComponent={<CurrencyContent setIsOpen={setIsOpen} />}
       />
     </>
   )
