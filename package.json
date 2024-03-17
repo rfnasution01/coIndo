@@ -19,6 +19,7 @@
     "lodash": "^4.17.21",
     "lucide-react": "^0.358.0",
     "react": "^18.2.0",
+    "react-hook-form": "^7.45.2",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^1.14.0",
     "react-dotenv": "^0.1.3",
