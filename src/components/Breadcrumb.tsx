@@ -19,8 +19,9 @@ export function Breadcrumb() {
           >
             <span
               className={clsx('font-roboto text-[2.4rem] ', {
-                'text-primary': idx < splittedPath.length - 1,
-                'text-primary-shade-1': idx >= splittedPath.length - 1,
+                'font-semibold': idx < splittedPath.length - 1,
+                'font-extralight text-primary-shade-1':
+                  idx >= splittedPath.length - 1,
               })}
             >
               {item === '' && idx === 1
@@ -30,7 +31,9 @@ export function Breadcrumb() {
                   : capitalizeFirstLetterFromLowercase(item)}
             </span>
           </Link>
-          <span>{idx < splittedPath.length - 1 && '/'}</span>
+          <span className="font-roboto text-[2.4rem] text-primary-shade-1">
+            {idx < splittedPath.length - 1 && '/'}
+          </span>
         </div>
       ))}
     </div>
