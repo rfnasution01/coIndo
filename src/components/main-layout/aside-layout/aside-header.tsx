@@ -16,11 +16,11 @@ export function AsideHeader({
         'flex-col-reverse items-center gap-y-16': !show,
       })}
     >
-      <div className="flex items-center gap-x-8 font-roboto text-[3rem] text-primary">
+      <div className="flex items-center gap-x-8 font-roboto text-[3rem]">
         <img src="/img/logo.png" alt="CoIndoe" width={36} height={36} />
         {show && <h5>CoIndo</h5>}
       </div>
-      <span className="text-primary" onClick={() => setShow(!show)}>
+      <span onClick={() => setShow(!show)}>
         <List />
       </span>
     </div>
