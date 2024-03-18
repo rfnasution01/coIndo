@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { List } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
+import { Link } from 'react-router-dom'
 
 export function AsideHeader({
   show,
@@ -16,10 +17,13 @@ export function AsideHeader({
         'flex-col-reverse items-center gap-y-16': !show,
       })}
     >
-      <div className="flex items-center gap-x-8 font-roboto text-[3rem]">
+      <Link
+        to="/"
+        className="flex items-center gap-x-8 font-roboto text-[3rem]"
+      >
         <img src="/img/logo.png" alt="CoIndoe" width={36} height={36} />
         {show && <h5>CoIndo</h5>}
-      </div>
+      </Link>
       <span onClick={() => setShow(!show)}>
         <List />
       </span>

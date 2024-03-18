@@ -18,7 +18,7 @@ export function CurrencyContent({
         suffix={<Search size={18} />}
         onChange={ratesContext.onSearch}
       />
-      <div className="scrollbar max-h-[50vh] overflow-y-auto">
+      <div className="scrollbar max-h-[50vh] overflow-y-auto phones:max-h-[85vh]">
         <div className="flex flex-col gap-y-24">
           {/* --- Crypto --- */}
           <CurrencyMapping
