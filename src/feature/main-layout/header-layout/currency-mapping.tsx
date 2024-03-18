@@ -55,7 +55,7 @@ export function CurrencyMapping({
             rates?.map((item, idx) => (
               <div
                 className={clsx(
-                  'col-span-3 flex items-center gap-x-16 rounded-xl p-16 hover:cursor-pointer hover:bg-primary-shade-1 hover:text-background',
+                  'col-span-3 flex items-center gap-x-16 rounded-xl p-16 hover:cursor-pointer hover:bg-primary-shade-1 hover:text-background phones:col-span-12',
                   {
                     'bg-primary-shade-1 text-background':
                       stateCurrency.symbol === item?.symbol,
