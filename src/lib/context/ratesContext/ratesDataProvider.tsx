@@ -1,17 +1,11 @@
-import { RatesType } from '@/lib/interfaces/ratesProps'
+import { useEffect, useState } from 'react'
+import { RatesDataContext } from './ratesData'
 import { useGetRatesQuery } from '@/store/slices/ratesAPI'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { CurrencyMapping } from './currency-mapping'
-import { Input } from '@/components/Input'
-import { Search } from 'lucide-react'
-import { debounce } from 'lodash'
 import { convertSlugToText } from '@/lib/helpers/formatText'
+import { debounce } from 'lodash'
+import { RatesType } from '@/lib/interfaces/ratesProps'
 
-export function CurrencyContent({
-  setIsOpen,
-}: {
-  setIsOpen: Dispatch<SetStateAction<boolean>>
-}) {
+const RatesDataProvider = ({ children }: { children: React.ReactNode }) => {
   const [search, setSearch] = useState<string>('')
   const { data, isLoading } = useGetRatesQuery()
   const [ratesCrypto, setRatesCrypto] = useState<RatesType[]>([])
@@ -52,31 +46,18 @@ export function CurrencyContent({
     handleSearch(value)
   }
 
+  const value = {
+    isLoading,
+    ratesCrypto,
+    ratesFiat,
+    onSearch,
+  }
+
   return (
-    <div className="flex flex-col gap-y-32">
-      <Input
-        placeholder="USD / United States Dollar / $"
-        suffix={<Search size={18} />}
-        onChange={onSearch}
-      />
-      <div className="scrollbar max-h-[50vh] overflow-y-auto">
-        <div className="flex flex-col gap-y-24">
-          {/* --- Crypto --- */}
-          <CurrencyMapping
-            title="Crypto Currency"
-            rates={ratesCrypto}
-            setIsOpen={setIsOpen}
-            isLoading={isLoading}
-          />
-          {/* --- Fiat --- */}
-          <CurrencyMapping
-            title="Fiat Currency"
-            rates={ratesFiat}
-            setIsOpen={setIsOpen}
-            isLoading={isLoading}
-          />
-        </div>
-      </div>
-    </div>
+    <RatesDataContext.Provider value={value}>
+      {children}
+    </RatesDataContext.Provider>
   )
 }
+
+export default RatesDataProvider

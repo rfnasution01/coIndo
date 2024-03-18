@@ -1,12 +1,12 @@
 import { useState } from 'react'
+import { Outlet } from 'react-router-dom'
+import { Breadcrumb } from './components/Breadcrumb'
 import {
   AsideHeader,
   AsideNavigation,
   AsideWallet,
   HeaderSetting,
-} from './components/main-layout'
-import { Outlet } from 'react-router-dom'
-import { Breadcrumb } from './components/Breadcrumb'
+} from './feature/main-layout'
 
 function App() {
   const [show, setShow] = useState<boolean>(true)
@@ -26,7 +26,7 @@ function App() {
           <Breadcrumb />
           <HeaderSetting />
         </header>
-        <article className="flex-1 bg-red-300">
+        <article className="flex-1">
           <Outlet />
         </article>
       </div>
