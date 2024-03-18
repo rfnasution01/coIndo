@@ -18,10 +18,10 @@ export function CurrencyMapping({
   setIsOpen,
   isLoading,
 }: {
-  rates: RatesType[]
+  rates?: RatesType[]
   title: string
   setIsOpen: Dispatch<SetStateAction<boolean>>
-  isLoading: boolean
+  isLoading?: boolean
 }) {
   const dispatch = useDispatch()
   const stateCurrency = useSelector(getCurrencySlice)
@@ -49,10 +49,10 @@ export function CurrencyMapping({
         <Loading />
       ) : (
         <div className="grid grid-cols-12 gap-24">
-          {rates.length === 0 ? (
+          {rates?.length === 0 ? (
             <NoData className="col-span-12" />
           ) : (
-            rates.map((item, idx) => (
+            rates?.map((item, idx) => (
               <div
                 className={clsx(
                   'col-span-3 flex items-center gap-x-16 rounded-xl p-16 hover:cursor-pointer hover:bg-primary-shade-1 hover:text-background',

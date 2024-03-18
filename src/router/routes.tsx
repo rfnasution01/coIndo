@@ -2,11 +2,16 @@ import { createBrowserRouter } from 'react-router-dom'
 
 import RootLayout from '@/App'
 import { Exchange, Homepage, Market, NotFound } from './loadables'
+import RatesDataProvider from '@/lib/context/ratesContext/ratesDataProvider'
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayout />,
+    element: (
+      <RatesDataProvider>
+        <RootLayout />
+      </RatesDataProvider>
+    ),
     children: [
       {
         path: '',
