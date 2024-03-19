@@ -38,7 +38,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             rounded-lg
             border-2
             border-[#8C9196]
-            bg-background
+            bg-white
             p-24
             text-[2rem]
             ring-offset-background

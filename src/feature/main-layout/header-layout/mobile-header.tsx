@@ -1,11 +1,17 @@
-import { Calculator, List } from 'lucide-react'
+import { List } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { AsideWallet, HeaderSetting } from '..'
 import { DialogComponent } from '@/components/ui/dialog'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { MobileNavigation } from './mobile-navigation'
 
-export function MobileHeader() {
+export function MobileHeader({
+  isLight,
+  setIsLight,
+}: {
+  isLight: boolean
+  setIsLight: Dispatch<SetStateAction<boolean>>
+}) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   return (
     <>
@@ -13,16 +19,12 @@ export function MobileHeader() {
         <span onClick={() => setIsOpen(true)}>
           <List />
         </span>
-        <Link to="/" className="flex items-center gap-x-16">
-          <img src="img/logo.png" alt="Coindo" width={48} height={48} />
-          <span className="font-roboto text-[3rem]">CoIndo</span>
-        </Link>
-        <div className="flex items-center gap-x-24">
+        <div className="flex items-center gap-x-48">
           <HeaderSetting />
-          <span>
-            <Calculator />
-          </span>
           <AsideWallet show={false} />
+          <Link to="/" className="flex items-center gap-x-16">
+            <img src="img/logo.png" alt="Coindo" width={48} height={48} />
+          </Link>
         </div>
       </div>
       <DialogComponent
@@ -35,7 +37,13 @@ export function MobileHeader() {
         open={isOpen}
         setOpen={setIsOpen}
         noPadding
-        customComponent={<MobileNavigation setIsOpen={setIsOpen} />}
+        customComponent={
+          <MobileNavigation
+            setIsLight={setIsLight}
+            isLight={isLight}
+            setIsOpenNav={setIsOpen}
+          />
+        }
       />
     </>
   )

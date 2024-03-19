@@ -10,16 +10,30 @@ export function DialogComponent({
   title,
   customComponent,
   noPadding,
+  size,
 }: {
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
   title: string | ReactNode
   customComponent?: ReactNode
   noPadding?: boolean
+  size?: 'full' | 'large' | 'medium' | 'small'
 }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="flex flex-col">
+      <DialogContent
+        className="flex flex-col"
+        style={{
+          width: size?.includes('full')
+            ? '100%'
+            : size?.includes('medium')
+              ? '50%'
+              : size?.includes('small')
+                ? '30%'
+                : '',
+          height: size?.includes('full') ? '100%' : '',
+        }}
+      >
         <DialogHeader>
           <DialogTitle
             className={clsx('', {
