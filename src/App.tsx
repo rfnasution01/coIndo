@@ -12,13 +12,14 @@ import clsx from 'clsx'
 
 function App() {
   const [show, setShow] = useState<boolean>(true)
+  const [isLight, setIsLight] = useState<boolean>(true)
 
   return (
     <section
       id="RootLayout"
       className="bg-backgrounds relative flex min-h-screen flex-row"
     >
-      <aside className="flex flex-col gap-y-64 bg-white px-32 py-48 shadow phones:hidden">
+      <aside className="flex flex-col gap-y-64 bg-white p-32 shadow phones:hidden">
         <AsideHeader show={show} setShow={setShow} />
         <AsideNavigation show={show} />
         <AsideWallet show={show} />
@@ -27,14 +28,14 @@ function App() {
         <header
           className={clsx(
             'flex items-center justify-between gap-y-32 px-48 pb-16 phones:hidden',
-            { 'pt-64': show, 'pt-48': !show },
+            { 'pt-48': show, 'pt-32': !show },
           )}
         >
           <Breadcrumb />
           <HeaderSetting />
         </header>
         <header className="hidden phones:block">
-          <MobileHeader />
+          <MobileHeader setIsLight={setIsLight} isLight={isLight} />
         </header>
         <article className="flex-1 gap-y-32 px-48 phones:py-32">
           <Outlet />
