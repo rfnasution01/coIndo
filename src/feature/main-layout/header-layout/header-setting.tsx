@@ -1,5 +1,12 @@
 import { DialogComponent } from '@/components/ui/dialog'
-import { Calculator, ChevronDown, Moon, SunMoon } from 'lucide-react'
+import {
+  Calculator,
+  ChevronDown,
+  Globe,
+  Moon,
+  Settings,
+  SunMoon,
+} from 'lucide-react'
 import { useState } from 'react'
 import { CurrencyContent } from './currency-content'
 import { useSelector } from 'react-redux'
@@ -14,26 +21,45 @@ export function HeaderSetting() {
 
   return (
     <>
-      <div className="flex items-center gap-x-48">
+      <div className="flex items-center gap-x-48 text-[2rem]">
+        {/* --- Currency ---  */}
         <div
           onClick={() => setIsOpenCurrency(true)}
-          className="flex items-center gap-x-8 font-roboto text-[2.4rem] text-black hover:cursor-pointer hover:text-primary-shade-1 phones:hidden"
+          className="flex items-center gap-x-4 hover:cursor-pointer hover:text-slate-400 phones:hidden"
         >
           <h5>{stateCurrency.symbol ?? '-'}</h5>
-          <ChevronDown />
+          <ChevronDown size={20} />
         </div>
-        <div
+
+        {/* --- Language ---  */}
+        <div className="flex items-center gap-x-8 hover:cursor-pointer hover:text-slate-400 phones:hidden">
+          <h5>Id</h5>
+          <Globe size={20} />
+        </div>
+
+        {/* --- Calculator ---  */}
+        <span
           onClick={() => setIsOpenCalculator(true)}
-          className="flex items-center gap-x-8 font-roboto text-[2.4rem] text-black hover:cursor-pointer hover:text-primary-shade-1 phones:hidden"
+          className="hover:cursor-pointer hover:text-slate-400 phones:hidden"
         >
-          <Calculator size={18} />
-        </div>
-        <div
+          <Calculator size={20} />
+        </span>
+
+        {/* --- Mode --- */}
+        <span
           onClick={() => setIsLight(!isLight)}
-          className="flex items-center gap-x-8 font-roboto text-[2.4rem] text-black hover:cursor-pointer hover:text-primary-shade-1 phones:hidden"
+          className="hover:cursor-pointer hover:text-slate-400 phones:hidden"
         >
-          {isLight ? <Moon size={18} /> : <SunMoon size={18} />}
-        </div>
+          {isLight ? <Moon size={20} /> : <SunMoon size={20} />}
+        </span>
+
+        {/* --- Setting --- */}
+        <span
+          onClick={() => setIsLight(!isLight)}
+          className="hover:cursor-pointer hover:text-slate-400 phones:hidden"
+        >
+          <Settings size={20} />
+        </span>
       </div>
       <DialogComponent
         title="Pilih Currency"
