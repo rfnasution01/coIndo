@@ -1,9 +1,9 @@
 import { List } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { AsideWallet, HeaderSetting } from '..'
-import { DialogComponent } from '@/components/ui/dialog'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { MobileNavigation } from './mobile-navigation'
+import { DialogHelpers } from '@/components/ui/dialog'
 
 export function MobileHeader({
   isLight,
@@ -27,7 +27,7 @@ export function MobileHeader({
           </Link>
         </div>
       </div>
-      <DialogComponent
+      <DialogHelpers
         title={
           <div className="flex items-center gap-x-24 px-16 py-24 shadow-md">
             <img src="/img/logo.png" alt="CoIndo" width={48} height={48} />

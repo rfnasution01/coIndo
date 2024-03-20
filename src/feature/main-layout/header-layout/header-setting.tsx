@@ -1,4 +1,3 @@
-import { DialogComponent } from '@/components/ui/dialog'
 import {
   Calculator,
   ChevronDown,
@@ -12,6 +11,7 @@ import { CurrencyContent } from './currency-content'
 import { useSelector } from 'react-redux'
 import { getCurrencySlice } from '@/store/reducer/stateCurrency'
 import { CalculatorContent } from './calculator-content'
+import { DialogHelpers } from '@/components/ui/dialog'
 
 export function HeaderSetting() {
   const [isOpenCurrency, setIsOpenCurrency] = useState<boolean>(false)
@@ -61,18 +61,18 @@ export function HeaderSetting() {
           <Settings size={20} />
         </span>
       </div>
-      <DialogComponent
+      <DialogHelpers
         title="Pilih Currency"
         open={isOpenCurrency}
         setOpen={setIsOpenCurrency}
         customComponent={<CurrencyContent setIsOpen={setIsOpenCurrency} />}
       />
-      <DialogComponent
+      <DialogHelpers
         title="Konversi Currency"
         open={isOpenCalculator}
         setOpen={setIsOpenCalculator}
         customComponent={<CalculatorContent />}
-        size="small"
+        size="medium"
       />
     </>
   )

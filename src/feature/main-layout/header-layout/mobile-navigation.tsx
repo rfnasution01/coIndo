@@ -1,4 +1,3 @@
-import { DialogComponent } from '@/components/ui/dialog'
 import { ListNavigationMain } from '@/lib/consts/dummy/ListNavigationMain'
 import { usePathname } from '@/lib/hooks/usePathname'
 import { getCurrencySlice } from '@/store/reducer/stateCurrency'
@@ -8,6 +7,7 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { CurrencyContent } from './currency-content'
+import { DialogHelpers } from '@/components/ui/dialog'
 
 export function MobileNavigation({
   setIsLight,
@@ -64,7 +64,7 @@ export function MobileNavigation({
           </div>
         </div>
       </div>
-      <DialogComponent
+      <DialogHelpers
         title="Pilih Currency"
         open={isOpen}
         setOpen={setIsOpen}
