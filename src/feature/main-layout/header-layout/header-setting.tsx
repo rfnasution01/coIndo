@@ -1,11 +1,4 @@
-import {
-  Calculator,
-  ChevronDown,
-  Globe,
-  Moon,
-  Settings,
-  SunMoon,
-} from 'lucide-react'
+import { Calculator, ChevronDown, Moon, Settings, SunMoon } from 'lucide-react'
 import { useState } from 'react'
 import { CurrencyContent } from './currency-content'
 import { useSelector } from 'react-redux'
@@ -33,8 +26,8 @@ export function HeaderSetting() {
 
         {/* --- Language ---  */}
         <div className="flex items-center gap-x-8 hover:cursor-pointer hover:text-slate-400 phones:hidden">
-          <h5>Id</h5>
-          <Globe size={20} />
+          <h5>ID</h5>
+          <ChevronDown size={20} />
         </div>
 
         {/* --- Calculator ---  */}

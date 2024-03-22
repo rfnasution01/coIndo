@@ -2,12 +2,13 @@ import { ListNavigationMain } from '@/lib/consts/dummy/ListNavigationMain'
 import { usePathname } from '@/lib/hooks/usePathname'
 import { getCurrencySlice } from '@/store/reducer/stateCurrency'
 import clsx from 'clsx'
-import { Calculator, ChevronDown, Moon, SunMoon } from 'lucide-react'
+import { Calculator, ChevronDown, Moon, Settings, SunMoon } from 'lucide-react'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { CurrencyContent } from './currency-content'
 import { DialogHelpers } from '@/components/ui/dialog'
+import { CalculatorContent } from './calculator-content'
 
 export function MobileNavigation({
   setIsLight,
@@ -20,7 +21,8 @@ export function MobileNavigation({
 }) {
   const { firstPathname } = usePathname()
   const stateCurrency = useSelector(getCurrencySlice)
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpenCurrency, setIsOpenCurrency] = useState<boolean>(false)
+  const [isOpenCalculator, setIsOpenCalculator] = useState<boolean>(false)
 
   const isPathnameOpen = (name: string) => {
     return (
@@ -45,19 +47,30 @@ export function MobileNavigation({
             <span className="text-[3rem]">{item?.name}</span>
           </Link>
         ))}
-        <div className="flex w-full items-center gap-x-32">
+        <div className="flex w-full flex-wrap items-center justify-center gap-32">
           <div
-            className="flex h-64 flex-1 items-center justify-center border-2 border-black text-[2rem]"
-            onClick={() => setIsOpen(true)}
+            className="flex h-64 w-3/12 items-center justify-center border-2 border-black text-[2rem]"
+            onClick={() => setIsOpenCurrency(true)}
           >
             <h5>{stateCurrency.symbol ?? '-'}</h5>
-            <ChevronDown />
-          </div>
-          <div className="flex h-64 flex-1 items-center justify-center border-2 border-black text-[2rem]">
-            <Calculator size={18} />
+            <ChevronDown size={18} />
           </div>
           <div
-            className="flex h-64 flex-1 items-center justify-center border-2 border-black text-[2rem]"
+            onClick={() => setIsOpenCalculator(true)}
+            className="flex h-64 w-3/12 items-center justify-center border-2 border-black text-[2rem]"
+          >
+            <Calculator size={18} />
+          </div>
+          <div className="flex h-64 w-3/12 items-center justify-center border-2 border-black text-[2rem]">
+            <Settings size={18} />
+          </div>
+          {/* --- Language ---  */}
+          <div className="flex h-64 w-3/12 items-center justify-center gap-x-4 border-2 border-black text-[2rem]">
+            <h5>ID</h5>
+            <ChevronDown size={18} />
+          </div>
+          <div
+            className="flex h-64 w-3/12 items-center justify-center border-2 border-black text-[2rem]"
             onClick={() => setIsLight(!isLight)}
           >
             {isLight ? <Moon size={18} /> : <SunMoon size={18} />}
@@ -66,9 +79,15 @@ export function MobileNavigation({
       </div>
       <DialogHelpers
         title="Pilih Currency"
-        open={isOpen}
-        setOpen={setIsOpen}
-        customComponent={<CurrencyContent setIsOpen={setIsOpen} />}
+        open={isOpenCurrency}
+        setOpen={setIsOpenCurrency}
+        customComponent={<CurrencyContent setIsOpen={setIsOpenCurrency} />}
+      />
+      <DialogHelpers
+        title="Konversi Currency"
+        open={isOpenCalculator}
+        setOpen={setIsOpenCalculator}
+        customComponent={<CalculatorContent />}
       />
     </>
   )
