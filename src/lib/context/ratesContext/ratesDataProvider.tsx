@@ -10,6 +10,7 @@ const RatesDataProvider = ({ children }: { children: React.ReactNode }) => {
   const { data, isLoading } = useGetRatesQuery()
   const [ratesCrypto, setRatesCrypto] = useState<RatesType[]>([])
   const [ratesFiat, setRatesFiat] = useState<RatesType[]>([])
+  const [ratesAll, setRatesAll] = useState<RatesType[]>([])
 
   useEffect(() => {
     if (data?.data) {
@@ -34,6 +35,7 @@ const RatesDataProvider = ({ children }: { children: React.ReactNode }) => {
 
       setRatesCrypto(filteredCrypto)
       setRatesFiat(filteredFiat)
+      setRatesAll(data?.data)
     }
   }, [data?.data, search])
 
@@ -51,6 +53,7 @@ const RatesDataProvider = ({ children }: { children: React.ReactNode }) => {
     ratesCrypto,
     ratesFiat,
     onSearch,
+    ratesAll,
   }
 
   return (

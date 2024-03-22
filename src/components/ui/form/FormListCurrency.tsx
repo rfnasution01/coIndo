@@ -17,6 +17,7 @@ interface ListCurrencyProps extends FormInputProps {
   data: RatesType[]
   placeHolder?: string
   name: string
+  initialValue?: DataSelectType
 }
 
 export function FormListCurrency({
@@ -28,6 +29,7 @@ export function FormListCurrency({
   useFormReturn,
   className,
   headerLabel,
+  initialValue,
 }: ListCurrencyProps) {
   const Option = (props: any) => {
     return (
@@ -53,26 +55,37 @@ export function FormListCurrency({
     <FormField
       name={name}
       control={useFormReturn.control}
-      render={({ field }) => (
+      render={({}) => (
         <FormItem className={cn('flex flex-col space-y-8', className)}>
           <FormLabel>{headerLabel}</FormLabel>
           <FormControl>
             <Select
+              defaultValue={initialValue}
               placeholder={placeHolder ?? 'Pilih ...'}
               isDisabled={isDisabled}
               isLoading={isLoading}
               value={
-                dataOptions.filter((item) => item.value === field.value)[0]
+                dataOptions.filter(
+                  (item) => item.value === initialValue?.value,
+                )[0]
               }
               isClearable
               isSearchable
               options={dataOptions}
               components={{ Option }}
               onChange={(optionSelected: any) => {
-                useFormReturn.setValue(name, optionSelected?.price)
+                useFormReturn.setValue(name, optionSelected.value)
                 useFormReturn.setValue(
-                  name.includes('priceCrypto') ? 'symbolCrypto' : 'symbolFIAT',
-                  optionSelected?.symbol,
+                  name.includes('idCurrency1')
+                    ? 'priceCurrency1'
+                    : 'priceCurrency2',
+                  optionSelected.price,
+                )
+                useFormReturn.setValue(
+                  name.includes('idCurrency1')
+                    ? 'symbolCurrency1'
+                    : 'symbolCurrency2',
+                  optionSelected.symbol,
                 )
               }}
             />
