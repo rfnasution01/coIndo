@@ -1,10 +1,15 @@
 import { Dispatch, ReactNode, SetStateAction } from 'react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../../Dialog'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
 import clsx from 'clsx'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/Dialog'
 
-export function DialogComponent({
+export function DialogHelpers({
   open,
   setOpen,
   title,

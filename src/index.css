@@ -9,10 +9,6 @@
     @apply m-0 box-border p-0;
   }
 
-  *:focus {
-    @apply shadow-active-primary outline-none transition-all;
-  }
-
   html {
     /* ! 10px / 16px = 62.5 */
     @apply text-[62.5%] bigger-desktops:text-[50%] smaller-desktops:text-[37.5%];

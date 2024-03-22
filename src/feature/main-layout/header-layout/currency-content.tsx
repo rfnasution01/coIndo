@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useContext } from 'react'
 import { CurrencyMapping } from './currency-mapping'
-import { Input } from '@/components/Input'
+import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-react'
 import { RatesDataContext } from '@/lib/context/ratesContext/ratesData'
 
@@ -15,7 +15,7 @@ export function CurrencyContent({
     <div className="flex flex-col gap-y-32">
       <Input
         placeholder="USD / United States Dollar / $"
-        suffix={<Search size={18} />}
+        prefix={<Search size={18} />}
         onChange={ratesContext.onSearch}
       />
       <div className="scrollbar max-h-[50vh] overflow-y-auto phones:max-h-[85vh]">

@@ -30,22 +30,23 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
           className={cn(
             `disabled:text-formText-disabled
-            border-input file:text-sm
+            border-input text-sm
             placeholder:text-muted-foreground
             disabled:bg-form-disabled
             h-48
             flex-grow
             rounded-lg
             border-2
-            border-[#8C9196]
+            border-slate-300
             bg-white
-            p-24
-            text-[2rem]
+            px-12
+            py-8
             ring-offset-background
             transition-all
             duration-300
             file:border-0
             file:bg-transparent
+            file:text-[2rem]
             file:font-medium
             focus:shadow-primary-shade-1
           disabled:cursor-not-allowed
@@ -60,7 +61,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
         {suffix && (
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-24">
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-16">
             {suffix}
           </div>
         )}

@@ -6,6 +6,7 @@ export type TabData = {
   isLoading?: boolean
   ratesCrypto?: RatesType[]
   ratesFiat?: RatesType[]
+  ratesAll?: RatesType[]
   onSearch?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
