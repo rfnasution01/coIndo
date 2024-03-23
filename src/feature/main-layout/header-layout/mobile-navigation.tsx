@@ -1,28 +1,29 @@
 import { ListNavigationMain } from '@/lib/consts/dummy/ListNavigationMain'
 import { usePathname } from '@/lib/hooks/usePathname'
-import { getCurrencySlice } from '@/store/reducer/stateCurrency'
 import clsx from 'clsx'
-import { Calculator, ChevronDown, Moon, Settings, SunMoon } from 'lucide-react'
-import { Dispatch, SetStateAction, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { Dispatch, SetStateAction } from 'react'
 import { Link } from 'react-router-dom'
 import { CurrencyContent } from './currency-content'
 import { DialogHelpers } from '@/components/ui/dialog'
 import { CalculatorContent } from './calculator-content'
+import { AsideWallet, OptionalNavigation } from '..'
 
 export function MobileNavigation({
-  setIsLight,
-  isLight,
   setIsOpenNav,
+  isOpenCalculator,
+  isOpenCurrency,
+  setIsOpenCalculator,
+  setIsOpenCurrency,
+  setIsOpen,
 }: {
-  isLight: boolean
-  setIsLight: Dispatch<SetStateAction<boolean>>
   setIsOpenNav: Dispatch<SetStateAction<boolean>>
+  isOpenCurrency: boolean
+  setIsOpenCurrency: Dispatch<SetStateAction<boolean>>
+  isOpenCalculator: boolean
+  setIsOpenCalculator: Dispatch<SetStateAction<boolean>>
+  setIsOpen: Dispatch<SetStateAction<boolean>>
 }) {
   const { firstPathname } = usePathname()
-  const stateCurrency = useSelector(getCurrencySlice)
-  const [isOpenCurrency, setIsOpenCurrency] = useState<boolean>(false)
-  const [isOpenCalculator, setIsOpenCalculator] = useState<boolean>(false)
 
   const isPathnameOpen = (name: string) => {
     return (
@@ -32,7 +33,7 @@ export function MobileNavigation({
   }
   return (
     <>
-      <div className="mt-48 flex flex-col gap-y-32">
+      <div className="mt-48 flex flex-col gap-y-32 ">
         {ListNavigationMain?.map((item, idx) => (
           <Link
             to={item?.url}
@@ -47,35 +48,14 @@ export function MobileNavigation({
             <span className="text-[3rem]">{item?.name}</span>
           </Link>
         ))}
-        <div className="flex w-full flex-wrap items-center justify-center gap-32">
-          <div
-            className="flex h-64 w-3/12 items-center justify-center border-2 border-black text-[2rem]"
-            onClick={() => setIsOpenCurrency(true)}
-          >
-            <h5>{stateCurrency.symbol ?? '-'}</h5>
-            <ChevronDown size={18} />
-          </div>
-          <div
-            onClick={() => setIsOpenCalculator(true)}
-            className="flex h-64 w-3/12 items-center justify-center border-2 border-black text-[2rem]"
-          >
-            <Calculator size={18} />
-          </div>
-          <div className="flex h-64 w-3/12 items-center justify-center border-2 border-black text-[2rem]">
-            <Settings size={18} />
-          </div>
-          {/* --- Language ---  */}
-          <div className="flex h-64 w-3/12 items-center justify-center gap-x-4 border-2 border-black text-[2rem]">
-            <h5>ID</h5>
-            <ChevronDown size={18} />
-          </div>
-          <div
-            className="flex h-64 w-3/12 items-center justify-center border-2 border-black text-[2rem]"
-            onClick={() => setIsLight(!isLight)}
-          >
-            {isLight ? <Moon size={18} /> : <SunMoon size={18} />}
-          </div>
-        </div>
+        <OptionalNavigation
+          isOpenCalculator={isOpenCalculator}
+          setIsOpenCalculator={setIsOpenCalculator}
+          isOpenCurrency={isOpenCurrency}
+          setIsOpenCurrency={setIsOpenCurrency}
+          setIsOpen={setIsOpen}
+        />
+        <AsideWallet show={false} />
       </div>
       <DialogHelpers
         title="Pilih Currency"

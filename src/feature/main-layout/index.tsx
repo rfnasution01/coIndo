@@ -4,4 +4,4 @@ export * from './aside-layout/aside-navigation'
 export * from './aside-layout/aside-wallet'
 
 // ----- Header -----
-export * from './header-layout/header-setting'
+export * from './header-layout/optional-navigation'

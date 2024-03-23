@@ -3,8 +3,8 @@ import { Wallet } from 'lucide-react'
 
 export function AsideWallet({ show }: { show: boolean }) {
   return (
-    <Button variant="solid" disabled>
-      <div className="flex items-center gap-x-8">
+    <Button variant="light" disabled>
+      <div className={'flex items-center gap-x-8'}>
         <span>
           <Wallet size={18} />
         </span>

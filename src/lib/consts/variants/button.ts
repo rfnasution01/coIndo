@@ -29,12 +29,22 @@ const variants = {
     'active:bg-general-tint-3',
     'active:border-general-tint-3',
   ],
+  light: [
+    'text-white',
+    'bg-zinc-800',
+    'border',
+    'border-zinc-800',
+    'hover:bg-zinc-900',
+    'hover:border-zinc-900',
+    'active:bg-zinc-100',
+    'active:border-zinc-100',
+  ],
 }
 
 export type ButtonVariants = keyof typeof variants
 
 export const buttonVariants = cva(
-  'flex items-center justify-center gap-8 p-16 leading-medium rounded-lg transition-all ease-in disabled:cursor-not-allowed disabled:bg-surface-disabled disabled:text-typography-disabled disabled:border-surface-disabled disabled:shadow-disabled',
+  'flex items-center justify-center gap-8 p-16 leading-medium rounded-lg transition-all ease-in disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-typography-disabled disabled:border-zinc-700 disabled:shadow-disabled',
   {
     variants: {
       variant: variants,

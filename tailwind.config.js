@@ -109,6 +109,14 @@ export default {
         typography: {
           disabled: '#8C9196',
         },
+        light: {
+          background: '#f0f4f7',
+          primary: '#1094DD',
+        },
+        dark: {
+          background: '#1f2937',
+          primary: '#60a5fa',
+        },
       },
 
       // ? ----- SHADOW SYSTEM

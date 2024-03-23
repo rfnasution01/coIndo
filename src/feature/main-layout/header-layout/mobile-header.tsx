@@ -1,27 +1,41 @@
 import { List } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { AsideWallet, HeaderSetting } from '..'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { MobileNavigation } from './mobile-navigation'
 import { DialogHelpers } from '@/components/ui/dialog'
+import { useSelector } from 'react-redux'
+import { getModeSlice } from '@/store/reducer/stateMode'
+import clsx from 'clsx'
 
 export function MobileHeader({
-  isLight,
-  setIsLight,
+  isOpenCalculator,
+  isOpenCurrency,
+  setIsOpenCalculator,
+  setIsOpenCurrency,
 }: {
-  isLight: boolean
-  setIsLight: Dispatch<SetStateAction<boolean>>
+  isOpenCurrency: boolean
+  setIsOpenCurrency: Dispatch<SetStateAction<boolean>>
+  isOpenCalculator: boolean
+  setIsOpenCalculator: Dispatch<SetStateAction<boolean>>
 }) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const mode = useSelector(getModeSlice)
+
   return (
     <>
-      <div className="flex items-center justify-between gap-x-16 bg-white px-48 py-32 shadow-lg">
+      <div
+        className={clsx(
+          'flex items-center justify-between gap-x-16 px-48 py-32 shadow-lg',
+          {
+            'bg-white': mode.isLight,
+            'bg-zinc-950': !mode?.isLight,
+          },
+        )}
+      >
         <span onClick={() => setIsOpen(true)}>
           <List />
         </span>
         <div className="flex items-center gap-x-48">
-          <HeaderSetting />
-          <AsideWallet show={false} />
           <Link to="/" className="flex items-center gap-x-16">
             <img src="img/logo.png" alt="Coindo" width={48} height={48} />
           </Link>
@@ -39,9 +53,12 @@ export function MobileHeader({
         noPadding
         customComponent={
           <MobileNavigation
-            setIsLight={setIsLight}
-            isLight={isLight}
             setIsOpenNav={setIsOpen}
+            isOpenCalculator={isOpenCalculator}
+            setIsOpenCalculator={setIsOpenCalculator}
+            isOpenCurrency={isOpenCurrency}
+            setIsOpenCurrency={setIsOpenCurrency}
+            setIsOpen={setIsOpen}
           />
         }
       />
