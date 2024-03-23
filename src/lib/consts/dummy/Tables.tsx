@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 
 export const columnsMarkets: Column<MarketsType>[] = [
   {
-    header: 'Exchange',
+    header: 'Market',
     key: 'exchangeId',
     info: 'Pengidentifikasi unik untuk nama exchange',
     width: '!min-w-[12rem]',

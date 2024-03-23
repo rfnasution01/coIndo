@@ -16,7 +16,7 @@ const Tooltips = ({
         </Tooltip.Trigger>
         <Tooltip.Portal>
           <Tooltip.Content
-            className="w-[15vw] rounded-xl border bg-white px-32 py-24 text-center shadow-xl"
+            className="z-20 w-[15vw] rounded-xl border bg-white px-32 py-24 text-center shadow-xl"
             sideOffset={5}
           >
             {tooltipContent}

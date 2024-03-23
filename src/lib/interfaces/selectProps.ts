@@ -4,11 +4,12 @@ import {
   UseControllerProps,
   UseFormReturn,
 } from 'react-hook-form'
+import { StylesConfig } from 'react-select'
 
 export type DataSelectType = {
-  value: number | string
-  label: string
-  price: Number
+  value: number | string | undefined
+  label: string | undefined
+  price?: Number
 }
 export interface FormInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -28,3 +29,15 @@ export type FormInputPropsType<
   isDisabled?: boolean
   className?: string
 } & UseControllerProps<TFieldValues, TName>
+
+export const customStyles: StylesConfig = {
+  control: (base, state) => {
+    return {
+      ...base,
+      background: state.isDisabled ? '#f2f2f2' : 'white',
+      opacity: state.isDisabled ? '0.5' : base.opacity,
+      cursor: state.isDisabled ? 'not-allowed' : base.cursor,
+      pointerEvents: state.isDisabled ? 'auto' : base.pointerEvents,
+    }
+  },
+}

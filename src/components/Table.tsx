@@ -3,7 +3,10 @@ import clsx from 'clsx'
 
 import { Loading } from './Loading'
 import { ChevronDown, CircleAlert } from 'lucide-react'
-import Tooltips from './ui/tooltip/Tooltip'
+import Tooltips from './Tooltip'
+import { useSelector } from 'react-redux'
+import { getModeSlice } from '@/store/reducer/stateMode'
+import { NoData } from './NoData'
 
 export type Column<T> = {
   header: string
@@ -34,13 +37,14 @@ export function Table<T, P>({
   onItemClick,
   collapseComponent,
 }: Props<T, P>) {
+  const mode = useSelector(getModeSlice)
   const [rowIsOpen, setRowIsOpen] = useState<number | null>(null)
 
   const columnArray =
     typeof columns === 'function' ? columns(columnProps as P) : columns
 
   return (
-    <div className={`rounded-2xl p-32 ${containerClasses}`}>
+    <div className={`rounded-3xl p-32 ${containerClasses}`}>
       {/* ----- Loading UI ----- */}
       {loading ? (
         <Loading width="6.4rem" height="6.4rem" />
@@ -51,18 +55,22 @@ export function Table<T, P>({
         >
           {/* ----- No Data/Fallback UI ----- */}
           {!data || data.length === 0 ? (
-            <p className="text-24 text-typography-disabled">No data.</p>
+            <NoData />
           ) : (
             <table className="flex-1 border-collapse text-[2rem]">
               <thead className="relative z-10 align-top leading-medium">
                 <tr className="border-b-[3rem] border-transparent">
                   {/* ----- Header Checkbox ----- */}
-                  <th className="sticky top-0 bg-white pb-24 text-left">No</th>
+                  <th
+                    className={`sticky top-0 pb-24 text-left ${mode.isLight ? 'bg-white' : 'bg-zinc-950'}`}
+                  >
+                    No
+                  </th>
 
                   {/* ----- Table Headers ----- */}
                   {columnArray.map((column, colIndex) => (
                     <th
-                      className={`sticky top-0 bg-white pb-24 ${column.width}`}
+                      className={`sticky top-0 pb-24 ${column.width} ${mode.isLight ? 'bg-white' : 'bg-zinc-950'}`}
                       key={column.key || colIndex.toString()}
                     >
                       <div className="flex items-start justify-start gap-x-12">
@@ -90,7 +98,7 @@ export function Table<T, P>({
                   <Fragment key={rowIndex}>
                     <tr
                       className={clsx(
-                        'border-b-[3rem] border-transparent transition-all ease-in hover:cursor-pointer hover:bg-surface-disabled',
+                        'border-b-[3rem] border-transparent transition-all ease-in hover:cursor-pointer hover:bg-surface-disabled hover:text-black',
                         {
                           'cursor-pointer': onItemClick,
                           'hover:bg-neutral-100':

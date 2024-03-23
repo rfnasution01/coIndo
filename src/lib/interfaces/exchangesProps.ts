@@ -1,5 +1,5 @@
 export type ExchangeType = {
-  id: string
+  exchangeId: string
   name: string
   rank: string
   percentTotalVolume: string

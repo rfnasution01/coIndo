@@ -7,23 +7,23 @@ import {
 } from '@/components/Form'
 import { convertSlugToText } from '@/lib/helpers/formatText'
 import { cn } from '@/lib/helpers/utils'
-import { RatesType } from '@/lib/interfaces/ratesProps'
+import { ExchangeType } from '@/lib/interfaces/exchangesProps'
 import { DataSelectType, FormInputProps } from '@/lib/interfaces/selectProps'
 import { getModeSlice } from '@/store/reducer/stateMode'
 import { useSelector } from 'react-redux'
 import Select, { components } from 'react-select'
 import { customStyles } from '@/lib/interfaces/selectProps'
 
-interface ListCurrencyProps extends FormInputProps {
+interface ListExchangeProps extends FormInputProps {
   isDisabled?: boolean
   isLoading?: boolean
-  data: RatesType[]
+  data: ExchangeType[]
   placeHolder?: string
   name: string
   initialValue?: DataSelectType
 }
 
-export function FormListCurrency({
+export function FormListExchange({
   isDisabled,
   isLoading,
   data,
@@ -33,15 +33,12 @@ export function FormListCurrency({
   className,
   headerLabel,
   initialValue,
-}: ListCurrencyProps) {
+}: ListExchangeProps) {
   const mode = useSelector(getModeSlice)
-
   const Option = (props: any) => {
     return (
       <components.Option {...props}>
-        <span>
-          {props?.data?.symbol} - {props?.label}
-        </span>
+        <span>{props?.label}</span>
       </components.Option>
     )
   }
@@ -49,10 +46,8 @@ export function FormListCurrency({
   let dataOptions: DataSelectType[] = []
   if (data) {
     dataOptions = data.map((item) => ({
-      value: item?.id,
-      label: convertSlugToText(item?.id),
-      symbol: item?.symbol,
-      price: Number(item?.rateUsd),
+      value: item?.exchangeId,
+      label: convertSlugToText(item?.name),
     }))
   }
 
@@ -117,40 +112,16 @@ export function FormListCurrency({
               isDisabled={isDisabled}
               isLoading={isLoading}
               value={
-                dataOptions.filter(
-                  (item) => item.value === initialValue?.value,
-                )[0]
+                dataOptions.filter((item) => item.value === field?.value)[0]
               }
               isClearable
               isSearchable
               options={dataOptions}
               components={{ Option }}
               onChange={(optionSelected: any) => {
-                const setValuePairs: any = {
-                  baseId: ['baseSymbol'],
-                  quoteId: ['quoteSymbol'],
-                  idCurrency1: ['symbolCurrency1', 'priceCurrency1'],
-                  idCurrency2: ['symbolCurrency2', 'priceCurrency2'],
-                }
+                console.log(optionSelected)
 
-                const setValue = (key: string, value: any) => {
-                  useFormReturn.setValue(key, value)
-                }
-
-                const symbols = optionSelected?.symbol
-
-                if (
-                  name.includes('idCurrency1') ||
-                  name.includes('idCurrency2')
-                ) {
-                  setValuePairs[name]?.forEach((key: string) =>
-                    setValue(key, symbols),
-                  )
-                } else {
-                  setValuePairs[name]?.forEach((key: string) =>
-                    setValue(key, optionSelected?.symbol),
-                  )
-                }
+                useFormReturn.setValue(name, optionSelected?.value)
               }}
             />
           </FormControl>
