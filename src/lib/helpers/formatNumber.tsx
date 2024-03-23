@@ -13,7 +13,7 @@ export function roundToNDecimals(number = 0, n = 0) {
 export function calculateCurrency({
   cryptoCurrency = 0,
   fiatCurrency = 0,
-  jumlah = 0,
+  jumlah = 1,
 }: {
   cryptoCurrency: number
   fiatCurrency: number
