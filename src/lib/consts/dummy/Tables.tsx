@@ -11,6 +11,7 @@ export const columnsMarkets: Column<MarketsType>[] = [
   {
     header: 'Exchange',
     key: 'exchangeId',
+    info: 'Pengidentifikasi unik untuk nama exchange',
     width: '!min-w-[12rem]',
     renderCell(rowData) {
       return (
@@ -25,6 +26,7 @@ export const columnsMarkets: Column<MarketsType>[] = [
   {
     header: 'Pairs',
     key: 'baseSymbol',
+    info: 'Kombinasi dari aset yang dibeli dan mata uang yang digunakan untuk membeli',
     width: '!min-w-[12rem]',
     renderCell(rowData) {
       return (
@@ -37,6 +39,7 @@ export const columnsMarkets: Column<MarketsType>[] = [
   {
     header: 'Harga',
     key: 'priceUsd',
+    info: 'Jumlah uang yang digunakan untuk memperdagangkan 1 aset',
     width: '!min-w-[12rem]',
     renderCell(rowData) {
       return <FormatNumber cryptoCurrency={Number(rowData?.priceUsd)} />
@@ -45,6 +48,7 @@ export const columnsMarkets: Column<MarketsType>[] = [
   {
     header: '24Hr %',
     key: 'percentExchangeVolume',
+    info: 'Jumlah volume harian yang ditransaksikan suatu pasar dalam kaitannya dengan total volume harian semua pasar di bursa',
     width: '!min-w-[12rem]',
     renderCell(rowData) {
       const percent24Hr = Number(rowData?.percentExchangeVolume)
@@ -60,12 +64,18 @@ export const columnsMarkets: Column<MarketsType>[] = [
   {
     header: 'Volume 24Hr ',
     key: 'volumeUsd24Hr',
+    info: 'Volume yang ditransaksikan di pasar ini dalam 24 jam terakhir',
     width: '!min-w-[12rem]',
     renderCell(rowData) {
       return <FormatNumber cryptoCurrency={Number(rowData?.volumeUsd24Hr)} />
     },
   },
-  { header: 'Count 24Hr', key: 'tradesCount24Hr', width: '!min-w-[12rem]' },
+  {
+    header: 'Count 24Hr',
+    key: 'tradesCount24Hr',
+    info: 'Jumlah perdagangan di pasar ini dalam 24 jam terakhir',
+    width: '!min-w-[12rem]',
+  },
 ]
 
 export const FormatNumber = ({

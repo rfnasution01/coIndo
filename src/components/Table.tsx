@@ -2,10 +2,12 @@ import { Fragment, useState } from 'react'
 import clsx from 'clsx'
 
 import { Loading } from './Loading'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, CircleAlert } from 'lucide-react'
+import Tooltips from './ui/tooltip/Tooltip'
 
 export type Column<T> = {
   header: string
+  info?: string
   key?: string | number
   renderCell?: (rowData: T) => React.ReactNode
   width?: string
@@ -60,10 +62,16 @@ export function Table<T, P>({
                   {/* ----- Table Headers ----- */}
                   {columnArray.map((column, colIndex) => (
                     <th
-                      className={`sticky top-0 bg-white pb-24 text-left ${column.width}`}
+                      className={`sticky top-0 bg-white pb-24 ${column.width}`}
                       key={column.key || colIndex.toString()}
                     >
-                      {column.header}
+                      <div className="flex items-start justify-start gap-x-12">
+                        <span>{column.header}</span>
+                        <Tooltips
+                          triggerComponent={<CircleAlert size={12} />}
+                          tooltipContent={<span>{column.info}</span>}
+                        />
+                      </div>
                     </th>
                   ))}
 
