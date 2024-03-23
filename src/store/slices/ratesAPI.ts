@@ -1,7 +1,7 @@
 import { Res, api } from '../api'
 import { RatesType } from '@/lib/interfaces/ratesProps'
 
-export const antreanEndpoints = api.injectEndpoints({
+export const ratesEndpoints = api.injectEndpoints({
   endpoints: (builder) => ({
     getRates: builder.query<Res<RatesType[]>, void>({
       query: () => ({
@@ -11,4 +11,4 @@ export const antreanEndpoints = api.injectEndpoints({
   }),
 })
 
-export const { useGetRatesQuery } = antreanEndpoints
+export const { useGetRatesQuery } = ratesEndpoints
