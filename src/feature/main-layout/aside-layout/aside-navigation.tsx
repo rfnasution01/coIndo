@@ -24,12 +24,10 @@ export function AsideNavigation({ show }: { show: boolean }) {
         <Link
           to={item?.url}
           className={clsx(
-            'flex items-center gap-x-16 rounded-lg border-l-2 px-8 py-12 hover:border-primary hover:bg-primary-tint-1 hover:text-primary',
+            'flex items-center gap-x-16 rounded-lg px-32 py-16 hover:text-white',
             {
-              'border-primary bg-primary-tint-1 text-primary': isPathnameOpen(
-                item?.name,
-              ),
-              'border-transparent': !isPathnameOpen(item?.name),
+              '': isPathnameOpen(item?.name),
+              'text-slate-400': !isPathnameOpen(item?.name),
             },
             {
               'min-w-[25rem]': show,

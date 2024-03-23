@@ -4,35 +4,75 @@ import {
   AsideHeader,
   AsideNavigation,
   AsideWallet,
-  HeaderSetting,
+  OptionalNavigation,
 } from './feature/main-layout'
 import { MobileHeader } from './feature/main-layout/header-layout/mobile-header'
-import { HeaderInfo } from './feature/main-layout/header-layout/header-info'
+import { Breadcrumb } from './components/Breadcrumb'
+import { useSelector } from 'react-redux'
+import { getModeSlice } from './store/reducer/stateMode'
+import clsx from 'clsx'
 
 function App() {
   const [show, setShow] = useState<boolean>(true)
-  const [isLight, setIsLight] = useState<boolean>(true)
+  const [isOpenCurrency, setIsOpenCurrency] = useState<boolean>(false)
+  const [isOpenCalculator, setIsOpenCalculator] = useState<boolean>(false)
+  const mode = useSelector(getModeSlice)
 
   return (
     <section
       id="RootLayout"
-      className="bg-backgrounds relative flex min-h-screen flex-col"
+      className={clsx(
+        'scrollbar relative flex max-h-screen min-h-screen max-w-full flex-col overflow-x-auto overflow-y-auto',
+        {
+          'bg-light-background text-black': mode.isLight,
+          'bg-dark-background text-white': !mode?.isLight,
+        },
+      )}
     >
-      <header className="flex items-center justify-between gap-y-32 bg-transparent px-32 py-24 shadow-md phones:hidden">
-        <HeaderInfo />
-        <HeaderSetting />
-      </header>
       <header className="hidden phones:block">
-        <MobileHeader setIsLight={setIsLight} isLight={isLight} />
+        <MobileHeader
+          isOpenCalculator={isOpenCalculator}
+          setIsOpenCalculator={setIsOpenCalculator}
+          isOpenCurrency={isOpenCurrency}
+          setIsOpenCurrency={setIsOpenCurrency}
+        />
       </header>
       <div className="flex h-full flex-1 flex-row">
-        <aside className="flex flex-col gap-y-64 bg-white p-32 shadow phones:hidden">
+        <aside
+          className={clsx(
+            'flex flex-col gap-y-64 bg-primary-shade-2 p-32 text-white shadow phones:hidden',
+            {
+              'bg-zinc-800': mode.isLight,
+              'bg-zinc-950': !mode?.isLight,
+            },
+          )}
+        >
           <AsideHeader show={show} setShow={setShow} />
           <AsideNavigation show={show} />
+
           <AsideWallet show={show} />
         </aside>
-        <article className="flex-1 gap-y-32 px-48 py-32">
-          <Outlet />
+        <article className="flex flex-1 flex-col gap-y-32">
+          <div
+            className={clsx(
+              'flex flex-row items-center justify-between px-48 py-16 shadow-md phones:hidden',
+              {
+                'bg-white': mode.isLight,
+                'bg-zinc-900': !mode?.isLight,
+              },
+            )}
+          >
+            <Breadcrumb />
+            <OptionalNavigation
+              isOpenCalculator={isOpenCalculator}
+              setIsOpenCalculator={setIsOpenCalculator}
+              isOpenCurrency={isOpenCurrency}
+              setIsOpenCurrency={setIsOpenCurrency}
+            />
+          </div>
+          <div className="scrollbar ph max-h-[80vh] overflow-y-auto px-48 phones:mt-32">
+            <Outlet />
+          </div>
         </article>
       </div>
     </section>
