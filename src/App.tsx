@@ -21,10 +21,13 @@ function App() {
   return (
     <section
       id="RootLayout"
-      className={clsx('relative flex min-h-screen flex-col', {
-        'bg-light-background text-black': mode.isLight,
-        'bg-dark-background text-white': !mode?.isLight,
-      })}
+      className={clsx(
+        'scrollbar relative flex max-h-screen min-h-screen max-w-full flex-col overflow-x-auto overflow-y-auto',
+        {
+          'bg-light-background text-black': mode.isLight,
+          'bg-dark-background text-white': !mode?.isLight,
+        },
+      )}
     >
       <header className="hidden phones:block">
         <MobileHeader
@@ -49,8 +52,16 @@ function App() {
 
           <AsideWallet show={show} />
         </aside>
-        <article className="flex flex-1 flex-col gap-y-32 px-48 py-32">
-          <div className="flex flex-row items-center justify-between phones:hidden">
+        <article className="flex flex-1 flex-col gap-y-32">
+          <div
+            className={clsx(
+              'flex flex-row items-center justify-between px-48 py-16 shadow-md phones:hidden',
+              {
+                'bg-white': mode.isLight,
+                'bg-zinc-900': !mode?.isLight,
+              },
+            )}
+          >
             <Breadcrumb />
             <OptionalNavigation
               isOpenCalculator={isOpenCalculator}
@@ -59,7 +70,9 @@ function App() {
               setIsOpenCurrency={setIsOpenCurrency}
             />
           </div>
-          <Outlet />
+          <div className="scrollbar max-h-[80vh] overflow-y-auto px-48">
+            <Outlet />
+          </div>
         </article>
       </div>
     </section>
