@@ -1,12 +1,13 @@
 import { Fragment, useState } from 'react'
 import clsx from 'clsx'
 
-import { useSearch } from '@/lib/hooks/useSearch'
 import { Loading } from './Loading'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, CircleAlert } from 'lucide-react'
+import Tooltips from './ui/tooltip/Tooltip'
 
 export type Column<T> = {
   header: string
+  info?: string
   key?: string | number
   renderCell?: (rowData: T) => React.ReactNode
   width?: string
@@ -21,10 +22,6 @@ type Props<T, P> = {
   columnProps?: P
   onItemClick?: (rowData: T) => void
   collapseComponent?: React.ReactNode
-  checkbox?: boolean
-  showCetak?: boolean
-  isFarmasi?: boolean
-  tableOne?: boolean
 }
 
 export function Table<T, P>({
@@ -36,19 +33,14 @@ export function Table<T, P>({
   columnProps,
   onItemClick,
   collapseComponent,
-  checkbox,
-  showCetak,
-  isFarmasi,
-  tableOne,
 }: Props<T, P>) {
   const [rowIsOpen, setRowIsOpen] = useState<number | null>(null)
-  const { currentPage } = useSearch()
 
   const columnArray =
     typeof columns === 'function' ? columns(columnProps as P) : columns
 
   return (
-    <div className={`rounded-2xl p-16 ${containerClasses}`}>
+    <div className={`rounded-2xl p-32 ${containerClasses}`}>
       {/* ----- Loading UI ----- */}
       {loading ? (
         <Loading width="6.4rem" height="6.4rem" />
@@ -61,45 +53,27 @@ export function Table<T, P>({
           {!data || data.length === 0 ? (
             <p className="text-24 text-typography-disabled">No data.</p>
           ) : (
-            <table className="flex-1 border-collapse text-24">
+            <table className="flex-1 border-collapse text-[2rem]">
               <thead className="relative z-10 align-top leading-medium">
-                <tr className="border-b-[1.6rem] border-transparent">
+                <tr className="border-b-[3rem] border-transparent">
                   {/* ----- Header Checkbox ----- */}
-                  {checkbox && (
-                    <th className="sticky top-0 bg-white p-4 text-left">No</th>
-                  )}
+                  <th className="sticky top-0 bg-white pb-24 text-left">No</th>
 
                   {/* ----- Table Headers ----- */}
-                  {columnArray
-                    .filter((column) => !column.header.includes('Aksi'))
-                    .map((column, colIndex) => (
-                      <th
-                        className={`sticky top-0 bg-white p-4 text-left ${column.width}`}
-                        key={column.key || colIndex.toString()}
-                      >
-                        {column.header.includes('Cetak')
-                          ? showCetak
-                            ? 'Cetak'
-                            : ''
-                          : column.header}
-                      </th>
-                    ))}
-
-                  {isFarmasi &&
-                    columnArray
-                      .filter((column) => column.header.includes('Aksi'))
-                      .map((column, colIndex) => (
-                        <th
-                          className={`sticky top-0 bg-white p-4 text-left ${column.width}`}
-                          key={column.key || colIndex.toString()}
-                        >
-                          {column.header.includes('Cetak')
-                            ? showCetak
-                              ? 'Cetak'
-                              : ''
-                            : column.header}
-                        </th>
-                      ))}
+                  {columnArray.map((column, colIndex) => (
+                    <th
+                      className={`sticky top-0 bg-white pb-24 ${column.width}`}
+                      key={column.key || colIndex.toString()}
+                    >
+                      <div className="flex items-start justify-start gap-x-12">
+                        <span>{column.header}</span>
+                        <Tooltips
+                          triggerComponent={<CircleAlert size={12} />}
+                          tooltipContent={<span>{column.info}</span>}
+                        />
+                      </div>
+                    </th>
+                  ))}
 
                   {/* ----- Detail Header ----- */}
                   {collapseComponent && (
@@ -116,7 +90,7 @@ export function Table<T, P>({
                   <Fragment key={rowIndex}>
                     <tr
                       className={clsx(
-                        'border-b-[1.6rem] border-transparent transition-all ease-in odd:bg-surface-disabled',
+                        'border-b-[3rem] border-transparent transition-all ease-in hover:cursor-pointer hover:bg-surface-disabled',
                         {
                           'cursor-pointer': onItemClick,
                           'hover:bg-neutral-100':
@@ -126,48 +100,20 @@ export function Table<T, P>({
                       onClick={onItemClick ? () => onItemClick(row) : undefined}
                     >
                       {/* ----- Body Checkbox ----- */}
-                      {checkbox && (
-                        <td className="p-4">
-                          {tableOne && currentPage
-                            ? currentPage - 1
-                            : rowIndex + 6 === 10
-                              ? ''
-                              : currentPage - 1}
-                          {tableOne ? rowIndex + 1 : rowIndex + 6}
-                        </td>
-                      )}
+                      <td className="p-4">{rowIndex + 1}</td>
 
                       {/* ----- Table Data ----- */}
-                      {columnArray
-                        .filter((column) => !column.header.includes('Aksi'))
-                        .map((column, colIndex) => (
-                          <td
-                            className={`p-4 leading-medium ${column.width}`}
-                            key={column.key || colIndex.toString()}
-                          >
-                            {column.renderCell
-                              ? column.renderCell(row)
-                              : (row[
-                                  column.key as keyof T
-                                ] as React.ReactNode) || '-'}
-                          </td>
-                        ))}
-
-                      {isFarmasi &&
-                        columnArray
-                          .filter((column) => column.header.includes('Aksi'))
-                          .map((column, colIndex) => (
-                            <td
-                              className={`p-4 leading-medium ${column.width}`}
-                              key={column.key || colIndex.toString()}
-                            >
-                              {column.renderCell
-                                ? column.renderCell(row)
-                                : (row[
-                                    column.key as keyof T
-                                  ] as React.ReactNode) || '-'}
-                            </td>
-                          ))}
+                      {columnArray.map((column, colIndex) => (
+                        <td
+                          className={`p-4 leading-medium ${column.width}`}
+                          key={column.key || colIndex.toString()}
+                        >
+                          {column.renderCell
+                            ? column.renderCell(row)
+                            : (row[column.key as keyof T] as React.ReactNode) ||
+                              '-'}
+                        </td>
+                      ))}
 
                       {/* ----- Collapse Trigger ----- */}
                       {collapseComponent && (
@@ -200,7 +146,7 @@ export function Table<T, P>({
                     {/* ----- Collapse Content ----- */}
                     {collapseComponent && (
                       <tr>
-                        <td colSpan={columnArray.length + (checkbox ? 2 : 1)}>
+                        <td colSpan={1}>
                           <div
                             className={clsx(
                               'overflow-hidden border-b bg-neutral-100 bg-opacity-[0.15] px-8 transition-all ease-in',
