@@ -22,7 +22,7 @@ export function AsideNavigation({ show }: { show: boolean }) {
     >
       {ListNavigationMain.map((item, idx) => (
         <Link
-          to={item?.url}
+          to={`${item?.url}?page=1`}
           className={clsx(
             'flex items-center gap-x-16 rounded-lg px-32 py-16 hover:text-white',
             {

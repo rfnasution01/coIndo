@@ -2,6 +2,8 @@ import { cva } from 'class-variance-authority'
 
 const variants = {
   outlined: ['bg-white', 'border'],
+  light: ['bg-white', 'shadow-lg'],
+  dark: ['bg-zinc-900', 'shadow-lg'],
 }
 
 const colors = {
@@ -11,6 +13,8 @@ const colors = {
   success: ['text-success', 'border-success'],
   general: ['text-general', 'border-general'],
   error: ['text-[#e95050], border-[#e95050]'],
+  light: ['text-black'],
+  dark: ['text-white'],
 }
 
 const radius = {

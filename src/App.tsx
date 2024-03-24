@@ -70,9 +70,7 @@ function App() {
               setIsOpenCurrency={setIsOpenCurrency}
             />
           </div>
-          <div className="scrollbar ph max-h-[80vh] min-h-[75vh] overflow-y-auto px-48 phones:mt-32">
-            <Outlet />
-          </div>
+          <Outlet />
         </article>
       </div>
     </section>

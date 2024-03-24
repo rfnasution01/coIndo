@@ -7,6 +7,7 @@ import Tooltips from './Tooltip'
 import { useSelector } from 'react-redux'
 import { getModeSlice } from '@/store/reducer/stateMode'
 import { NoData } from './NoData'
+import { useSearch } from '@/lib/hooks/useSearch'
 
 export type Column<T> = {
   header: string
@@ -38,6 +39,7 @@ export function Table<T, P>({
   collapseComponent,
 }: Props<T, P>) {
   const mode = useSelector(getModeSlice)
+  const { currentPage } = useSearch()
   const [rowIsOpen, setRowIsOpen] = useState<number | null>(null)
 
   const columnArray =
@@ -108,7 +110,9 @@ export function Table<T, P>({
                       onClick={onItemClick ? () => onItemClick(row) : undefined}
                     >
                       {/* ----- Body Checkbox ----- */}
-                      <td className="p-4">{rowIndex + 1}</td>
+                      <td className="p-4">
+                        {currentPage * 100 - 100 + rowIndex + 1}
+                      </td>
 
                       {/* ----- Table Data ----- */}
                       {columnArray.map((column, colIndex) => (
