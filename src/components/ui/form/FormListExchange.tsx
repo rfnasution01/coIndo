@@ -127,8 +127,6 @@ export function FormListExchange({
               options={dataOptions}
               components={{ Option }}
               onChange={(optionSelected: any) => {
-                console.log(optionSelected)
-
                 useFormReturn.setValue(name, optionSelected?.value)
               }}
             />
