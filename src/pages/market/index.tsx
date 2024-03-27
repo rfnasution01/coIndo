@@ -1,3 +1,4 @@
+import { Refetch } from '@/components/Refetch'
 import { Table } from '@/components/Table'
 import { ContentTemplate } from '@/feature/main-layout/content-layout/content-template'
 import { MarketInfo } from '@/feature/markets'
@@ -7,7 +8,6 @@ import { useSearch } from '@/lib/hooks/useSearch'
 import { MarketsType } from '@/lib/interfaces/marketsProps'
 import { useGetMarketsQuery } from '@/store/slices/marketsAPI'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { RefreshCcw } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -70,17 +70,7 @@ export default function Market() {
     <ContentTemplate
       form={form}
       totalPage={totalPage}
-      refetch={
-        <div
-          onClick={refetch}
-          className="flex items-center gap-x-8 rounded-lg bg-background px-24 py-12 text-[2rem] hover:cursor-pointer hover:bg-background"
-        >
-          <span>
-            <RefreshCcw size={18} />
-          </span>
-          <span>Refresh</span>
-        </div>
-      }
+      refetch={<Refetch refetch={refetch} />}
       table={
         <Table
           data={
