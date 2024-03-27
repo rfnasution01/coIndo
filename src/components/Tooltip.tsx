@@ -24,8 +24,9 @@ const Tooltips = ({
             className={clsx(
               'z-20 w-[15vw] rounded-xl border px-32 py-24 text-center shadow-xl',
               {
-                'bg-white text-black': mode.isLight,
-                'bg-zinc-900 text-white': !mode.isLight,
+                'border-slate-300 bg-white text-black': mode.isLight,
+                'bg-dark-tint-1 border-dark-background text-white':
+                  !mode.isLight,
               },
             )}
             sideOffset={5}

@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority'
 const variants = {
   outlined: ['bg-white', 'border'],
   light: ['bg-white', 'shadow-lg'],
-  dark: ['bg-zinc-900', 'shadow-lg'],
+  dark: ['bg-dark-tint-2', 'shadow-lg'],
 }
 
 const colors = {

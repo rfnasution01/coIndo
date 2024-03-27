@@ -12,6 +12,8 @@ import { calculateCurrency } from '@/lib/helpers/formatNumber'
 import { capitalizeFirstLetterFromLowercase } from '@/lib/helpers/formatText'
 import { useSelector } from 'react-redux'
 import { getCurrencySlice } from '@/store/reducer/stateCurrency'
+import { getModeSlice } from '@/store/reducer/stateMode'
+import clsx from 'clsx'
 
 export function CalculatorContent() {
   const [changePosition, setChangePosition] = useState<boolean>(false)
@@ -32,6 +34,7 @@ export function CalculatorContent() {
   })
 
   const formWatch = form.watch()
+  const mode = useSelector(getModeSlice)
 
   return (
     <Form {...form}>
@@ -124,7 +127,15 @@ export function CalculatorContent() {
           />
         </div>
 
-        <div className="flex h-[30vh] flex-col items-center justify-center gap-y-24 bg-background p-24">
+        <div
+          className={clsx(
+            'flex h-[30vh] flex-col items-center justify-center gap-y-24 border p-24',
+            {
+              'border-slate-300 bg-white': mode.isLight,
+              'bg-dark-tint-1 border-zinc-800': !mode.isLight,
+            },
+          )}
+        >
           <FormatManipulationComponent
             className="text-[4rem] font-bold"
             currencySymbol={formWatch?.symbolCurrency2}

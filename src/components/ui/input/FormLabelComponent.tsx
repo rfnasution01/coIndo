@@ -1,6 +1,9 @@
 import { UseFormReturn } from 'react-hook-form'
 import { FormField, FormItem, FormLabel, FormMessage } from '@/components/Form'
 import { Input } from '.'
+import { useSelector } from 'react-redux'
+import { getModeSlice } from '@/store/reducer/stateMode'
+import clsx from 'clsx'
 
 export function FormLabelComponent({
   form,
@@ -19,6 +22,8 @@ export function FormLabelComponent({
   suffix?: JSX.Element
   type?: 'text' | 'number'
 }) {
+  const mode = useSelector(getModeSlice)
+
   return (
     <FormField
       control={form.control}
@@ -28,6 +33,10 @@ export function FormLabelComponent({
           <FormLabel>{label}</FormLabel>
           <Input
             {...field}
+            className={clsx('', {
+              'border-slate-300 bg-white': mode.isLight,
+              'bg-dark-tint-1 border-zinc-700': !mode.isLight,
+            })}
             type={type}
             placeholder={placeholder}
             value={field.value}

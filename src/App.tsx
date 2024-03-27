@@ -37,14 +37,11 @@ function App() {
           setIsOpenCurrency={setIsOpenCurrency}
         />
       </header>
-      <div className="flex h-full flex-1 flex-row">
+      <div className="flex flex-1 flex-row">
         <aside
           className={clsx(
-            'flex flex-col gap-y-64 bg-primary-shade-2 p-32 text-white shadow phones:hidden',
-            {
-              'bg-zinc-800': mode.isLight,
-              'bg-zinc-950': !mode?.isLight,
-            },
+            'sticky left-0 top-0 flex max-h-screen flex-col gap-y-64 p-32 text-white shadow phones:hidden',
+            { 'bg-dark-tint-2': mode.isLight, 'bg-dark-tint-1': !mode.isLight },
           )}
         >
           <AsideHeader show={show} setShow={setShow} />
@@ -58,7 +55,7 @@ function App() {
               'flex flex-row items-center justify-between px-48 py-16 shadow-md phones:hidden',
               {
                 'bg-white': mode.isLight,
-                'bg-zinc-900': !mode?.isLight,
+                'bg-dark-tint-2': !mode?.isLight,
               },
             )}
           >

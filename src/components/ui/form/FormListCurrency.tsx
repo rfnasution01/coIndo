@@ -68,6 +68,14 @@ export function FormListCurrency({
               {...field}
               styles={{
                 ...customStyles,
+                singleValue: (provided) => ({
+                  ...provided,
+                  color: mode.isLight ? 'black' : 'grey',
+                }),
+                input: (provided) => ({
+                  ...provided,
+                  color: mode.isLight ? 'black' : 'grey',
+                }),
                 menuList: (provided) => ({
                   ...provided,
                   padding: 0,
@@ -126,31 +134,17 @@ export function FormListCurrency({
               options={dataOptions}
               components={{ Option }}
               onChange={(optionSelected: any) => {
-                const setValuePairs: any = {
-                  baseId: ['baseSymbol'],
-                  quoteId: ['quoteSymbol'],
-                  idCurrency1: ['symbolCurrency1', 'priceCurrency1'],
-                  idCurrency2: ['symbolCurrency2', 'priceCurrency2'],
-                }
+                const isIdCurrency1 = name.includes('idCurrency1')
 
-                const setValue = (key: string, value: any) => {
-                  useFormReturn.setValue(key, value)
-                }
-
-                const symbols = optionSelected?.symbol
-
-                if (
-                  name.includes('idCurrency1') ||
-                  name.includes('idCurrency2')
-                ) {
-                  setValuePairs[name]?.forEach((key: string) =>
-                    setValue(key, symbols),
-                  )
-                } else {
-                  setValuePairs[name]?.forEach((key: string) =>
-                    setValue(key, optionSelected?.symbol),
-                  )
-                }
+                useFormReturn.setValue(name, optionSelected?.value)
+                useFormReturn.setValue(
+                  isIdCurrency1 ? 'priceCurrency1' : 'priceCurrency2',
+                  optionSelected.price,
+                )
+                useFormReturn.setValue(
+                  isIdCurrency1 ? 'symbolCurrency1' : 'symbolCurrency2',
+                  optionSelected.symbol,
+                )
               }}
             />
           </FormControl>

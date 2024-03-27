@@ -37,11 +37,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             flex-grow
             rounded-lg
             border-2
-            border-slate-300
-            bg-white
             px-12
             py-8
-            ring-offset-background
             transition-all
             duration-300
             file:border-0

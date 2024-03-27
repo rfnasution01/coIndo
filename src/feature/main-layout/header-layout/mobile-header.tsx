@@ -28,7 +28,7 @@ export function MobileHeader({
           'flex items-center justify-between gap-x-16 px-48 py-32 shadow-lg',
           {
             'bg-white': mode.isLight,
-            'bg-zinc-950': !mode?.isLight,
+            'bg-dark-tint-2': !mode?.isLight,
           },
         )}
       >

@@ -8,6 +8,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/Dialog'
+import { useSelector } from 'react-redux'
+import { getModeSlice } from '@/store/reducer/stateMode'
 
 export function DialogHelpers({
   open,
@@ -24,10 +26,14 @@ export function DialogHelpers({
   noPadding?: boolean
   size?: 'full' | 'large' | 'medium' | 'small'
 }) {
+  const mode = useSelector(getModeSlice)
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
-        className="flex flex-col"
+        className={clsx('flex flex-col', {
+          'bg-background text-black': mode.isLight,
+          'bg-dark-background text-background': !mode.isLight,
+        })}
         style={{
           width: size?.includes('full')
             ? '100%'

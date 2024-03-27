@@ -1,13 +1,13 @@
+import { Refetch } from '@/components/Refetch'
 import { Table } from '@/components/Table'
 import { ContentTemplate } from '@/feature/main-layout/content-layout/content-template'
-import { MarketInfo } from '@/feature/markets'
+import { MarketInfo, MarketsFilter } from '@/feature/markets'
 import { columnsMarkets } from '@/lib/consts/dummy/Tables'
 import { marketSchema } from '@/lib/consts/schema/marketSchema'
 import { useSearch } from '@/lib/hooks/useSearch'
 import { MarketsType } from '@/lib/interfaces/marketsProps'
 import { useGetMarketsQuery } from '@/store/slices/marketsAPI'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { RefreshCcw } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -68,18 +68,9 @@ export default function Market() {
 
   return (
     <ContentTemplate
-      form={form}
       totalPage={totalPage}
-      refetch={
-        <div
-          onClick={refetch}
-          className="flex items-center gap-x-8 rounded-lg bg-background px-24 py-12 text-[2rem] hover:cursor-pointer hover:bg-background"
-        >
-          <span>
-            <RefreshCcw size={18} />
-          </span>
-          <span>Refresh</span>
-        </div>
+      filter={
+        <MarketsFilter form={form} refetch={<Refetch refetch={refetch} />} />
       }
       table={
         <Table
@@ -90,7 +81,7 @@ export default function Market() {
             ) ?? []
           }
           columns={columnsMarkets}
-          containerClasses="h-full"
+          containerClasses="h-full phones:w-[calc(100vw_-_11rem)]"
           loading={isLoading || isFetching}
         />
       }

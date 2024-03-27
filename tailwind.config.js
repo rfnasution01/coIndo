@@ -116,6 +116,7 @@ export default {
         dark: {
           background: '#1f2937',
           primary: '#60a5fa',
+          tint: { 1: '#334155', 2: '#181818' },
         },
       },
 

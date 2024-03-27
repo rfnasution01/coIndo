@@ -31,11 +31,11 @@ const variants = {
   ],
   light: [
     'text-white',
-    'bg-zinc-800',
+    'bg-dark-background',
     'border',
-    'border-zinc-800',
+    'border-dark-background',
     'hover:bg-zinc-900',
-    'hover:border-zinc-900',
+    'hover:border-dark-tint-2',
     'active:bg-zinc-100',
     'active:border-zinc-100',
   ],
@@ -44,7 +44,7 @@ const variants = {
 export type ButtonVariants = keyof typeof variants
 
 export const buttonVariants = cva(
-  'flex items-center justify-center gap-8 p-16 leading-medium rounded-lg transition-all ease-in disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-typography-disabled disabled:border-zinc-700 disabled:shadow-disabled',
+  'flex items-center justify-center gap-8 p-16 leading-medium rounded-lg transition-all ease-in disabled:cursor-not-allowed disabled:bg-dark-background  disabled:text-typography-disabled disabled:border-zinc-700 disabled:shadow-disabled',
   {
     variants: {
       variant: variants,
