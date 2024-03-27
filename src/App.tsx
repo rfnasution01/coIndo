@@ -37,10 +37,10 @@ function App() {
           setIsOpenCurrency={setIsOpenCurrency}
         />
       </header>
-      <div className="flex h-full flex-1 flex-row">
+      <div className="flex flex-1 flex-row">
         <aside
           className={clsx(
-            'flex flex-col gap-y-64 bg-primary-shade-2 p-32 text-white shadow phones:hidden',
+            'sticky left-0 top-0 flex max-h-screen flex-col gap-y-64 bg-primary-shade-2 p-32 text-white shadow phones:hidden',
             {
               'bg-zinc-800': mode.isLight,
               'bg-zinc-950': !mode?.isLight,

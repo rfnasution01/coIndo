@@ -1,7 +1,7 @@
 import { Badge } from '@/components/Badge'
 import { CardHelper, CardMapping } from '@/components/ui/card'
 import { FormatManipulationComponent } from '@/lib/helpers/formatComponent'
-import { calculateCurrency } from '@/lib/helpers/formatNumber'
+import { calculateCurrency, roundToNDecimals } from '@/lib/helpers/formatNumber'
 import { capitalizeFirstLetterFromLowercase } from '@/lib/helpers/formatText'
 import { MarketsType } from '@/lib/interfaces/marketsProps'
 import { getCurrencySlice } from '@/store/reducer/stateCurrency'
@@ -59,7 +59,8 @@ export function MarketInfo({
                   description={`${item?.baseSymbol}/${item?.quoteSymbol}`}
                   subLabel={
                     <Badge variant="success">
-                      +{item?.percentExchangeVolume}
+                      +
+                      {roundToNDecimals(Number(item?.percentExchangeVolume), 2)}
                     </Badge>
                   }
                 />
