@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import RootLayout from '@/App'
 import { Exchange, Homepage, Market, NotFound } from './loadables'
 import RatesDataProvider from '@/lib/context/ratesContext/ratesDataProvider'
+import ExchangeDataProvider from '@/lib/context/exchangeContext/exchangeDataProvider'
 
 export const router = createBrowserRouter([
   {
@@ -23,7 +24,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'market',
-        element: <Market />,
+        element: (
+          <ExchangeDataProvider>
+            <Market />
+          </ExchangeDataProvider>
+        ),
       },
     ],
     // children: [
