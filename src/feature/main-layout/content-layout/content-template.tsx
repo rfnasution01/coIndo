@@ -27,7 +27,7 @@ export function ContentTemplate({
       <div
         className={clsx('flex flex-col rounded-2xl', {
           'bg-white': mode.isLight,
-          'bg-zinc-900': !mode.isLight,
+          'bg-dark-tint-2': !mode.isLight,
         })}
       >
         {/* --- Filter --- */}

@@ -32,7 +32,7 @@ export function DialogHelpers({
       <DialogContent
         className={clsx('flex flex-col', {
           'bg-background text-black': mode.isLight,
-          'bg-zinc-800 text-background': !mode.isLight,
+          'bg-dark-background text-background': !mode.isLight,
         })}
         style={{
           width: size?.includes('full')

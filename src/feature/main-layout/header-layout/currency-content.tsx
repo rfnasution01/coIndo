@@ -3,6 +3,9 @@ import { CurrencyMapping } from './currency-mapping'
 import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-react'
 import { RatesDataContext } from '@/lib/context/ratesContext/ratesData'
+import { useSelector } from 'react-redux'
+import { getModeSlice } from '@/store/reducer/stateMode'
+import clsx from 'clsx'
 
 export function CurrencyContent({
   setIsOpen,
@@ -10,10 +13,15 @@ export function CurrencyContent({
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }) {
   const ratesContext = useContext(RatesDataContext)
+  const mode = useSelector(getModeSlice)
 
   return (
     <div className="flex flex-col gap-y-32">
       <Input
+        className={clsx('border', {
+          'border-slate-300 bg-white': mode.isLight,
+          'bg-dark-tint-1 border-zinc-800': !mode.isLight,
+        })}
         placeholder="USD / United States Dollar / $"
         prefix={<Search size={18} />}
         onChange={ratesContext.onSearch}

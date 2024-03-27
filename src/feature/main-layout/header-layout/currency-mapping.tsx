@@ -7,6 +7,7 @@ import {
   getCurrencySlice,
   setStateCurrency,
 } from '@/store/reducer/stateCurrency'
+import { getModeSlice } from '@/store/reducer/stateMode'
 import clsx from 'clsx'
 import { Check, Gem } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
@@ -25,6 +26,7 @@ export function CurrencyMapping({
 }) {
   const dispatch = useDispatch()
   const stateCurrency = useSelector(getCurrencySlice)
+  const mode = useSelector(getModeSlice)
 
   const handleChangeCurrency = (
     symbol: string,
@@ -55,10 +57,20 @@ export function CurrencyMapping({
             rates?.map((item, idx) => (
               <div
                 className={clsx(
-                  'col-span-3 flex items-center gap-x-16 rounded-xl p-16 hover:cursor-pointer hover:bg-primary-shade-1 hover:text-background phones:col-span-12',
+                  'col-span-3 flex items-center gap-x-16 rounded-xl p-16 hover:cursor-pointer phones:col-span-12',
+
                   {
-                    'bg-primary-shade-1 text-background':
-                      stateCurrency.symbol === item?.symbol,
+                    'bg-slate-300 text-dark-background':
+                      stateCurrency.symbol === item?.symbol && mode.isLight,
+                    'text-black':
+                      stateCurrency.symbol !== item?.symbol && mode.isLight,
+                    'bg-dark-tint-1':
+                      stateCurrency.symbol === item?.symbol && !mode.isLight,
+                  },
+                  {
+                    'hover:bg-slate-300 hover:text-dark-background':
+                      mode.isLight,
+                    'hover:bg-dark-tint-1': !mode.isLight,
                   },
                 )}
                 key={idx}
@@ -75,10 +87,8 @@ export function CurrencyMapping({
                   className={clsx(
                     'flex h-48 w-48 items-center justify-center rounded-full',
                     {
-                      'bg-background text-primary-shade-1':
-                        stateCurrency.symbol === item?.symbol,
-                      'bg-primary-shade-1 text-background':
-                        stateCurrency.symbol !== item?.symbol,
+                      'bg-slate-200': mode.isLight,
+                      'bg-primary-shade-1': !mode.isLight,
                     },
                   )}
                 >
@@ -93,8 +103,16 @@ export function CurrencyMapping({
                   <h5>{item?.symbol}</h5>
                 </div>
                 {stateCurrency.symbol === item?.symbol && (
-                  <span className="flex h-32 w-32 items-center justify-center rounded-full bg-success-tint-2 text-black">
-                    <Check size={12} />
+                  <span
+                    className={clsx(
+                      'flex h-32 w-32 items-center justify-center rounded-full',
+                      {
+                        'bg-success-shade-1 text-success-tint-2': mode.isLight,
+                        'bg-success-tint-1': !mode.isLight,
+                      },
+                    )}
+                  >
+                    <Check size={18} />
                   </span>
                 )}
               </div>

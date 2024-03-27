@@ -13,7 +13,8 @@ export function Refetch({ refetch }: { refetch: () => void }) {
         'flex items-center gap-x-8 rounded-lg border-2 px-24 py-12 text-[2rem] hover:cursor-pointer',
         {
           'bg-white hover:bg-background': mode.isLight,
-          'bg-dark-tint-1 border-zinc-800 hover:bg-zinc-800': !mode.isLight,
+          'bg-dark-tint-1 border-zinc-800 hover:bg-dark-background':
+            !mode.isLight,
         },
       )}
     >

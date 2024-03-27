@@ -64,7 +64,7 @@ export function Table<T, P>({
                 <tr className="border-b-[3rem] border-transparent">
                   {/* ----- Header Checkbox ----- */}
                   <th
-                    className={`sticky top-0 pb-24 text-left ${mode.isLight ? 'bg-white' : 'bg-zinc-950'}`}
+                    className={`sticky top-0 pb-24 text-left ${mode.isLight ? 'bg-white' : 'bg-dark-tint-2'}`}
                   >
                     No
                   </th>
@@ -72,7 +72,7 @@ export function Table<T, P>({
                   {/* ----- Table Headers ----- */}
                   {columnArray.map((column, colIndex) => (
                     <th
-                      className={`sticky top-0 pb-24 ${column.width} ${mode.isLight ? 'bg-white' : 'bg-zinc-950'}`}
+                      className={`sticky top-0 pb-24 ${column.width} ${mode.isLight ? 'bg-white' : 'bg-dark-tint-2'}`}
                       key={column.key || colIndex.toString()}
                     >
                       <div className="flex items-start justify-start gap-x-12">
@@ -100,11 +100,17 @@ export function Table<T, P>({
                   <Fragment key={rowIndex}>
                     <tr
                       className={clsx(
-                        'border-b-[3rem] border-transparent transition-all ease-in hover:cursor-pointer hover:bg-surface-disabled hover:text-black',
+                        'border-b-[3rem] border-transparent transition-all ease-in hover:cursor-pointer',
                         {
                           'cursor-pointer': onItemClick,
                           'hover:bg-neutral-100':
                             onItemClick && !collapseComponent,
+                        },
+                        {
+                          'hover:bg-surface-disabled hover:text-black':
+                            mode.isLight,
+                          'hover:bg-dark-tint-1 hover:text-background':
+                            !mode.isLight,
                         },
                       )}
                       onClick={onItemClick ? () => onItemClick(row) : undefined}
