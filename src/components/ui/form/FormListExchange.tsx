@@ -63,6 +63,14 @@ export function FormListExchange({
               {...field}
               styles={{
                 ...customStyles,
+                singleValue: (provided) => ({
+                  ...provided,
+                  color: mode.isLight ? 'black' : 'grey',
+                }),
+                input: (provided) => ({
+                  ...provided,
+                  color: mode.isLight ? 'black' : 'grey',
+                }),
                 menuList: (provided) => ({
                   ...provided,
                   padding: 0,
