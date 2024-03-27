@@ -19,7 +19,7 @@ export function MarketInfo({
   const stateCurrency = useSelector(getCurrencySlice)
 
   return (
-    <div className="grid grid-cols-12 gap-32">
+    <div className="grid grid-cols-12 gap-32 phones:hidden">
       {/* --- Top Volume --- */}
       <CardHelper
         title="Top Volume 24Hr"

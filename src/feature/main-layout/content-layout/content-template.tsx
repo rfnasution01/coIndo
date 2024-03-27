@@ -1,22 +1,18 @@
 import { Pagination } from '@/components/Pagination'
-import { MarketsFilter } from '@/feature/markets'
 import { getModeSlice } from '@/store/reducer/stateMode'
 import clsx from 'clsx'
 import { ReactNode } from 'react'
-import { UseFormReturn } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 
 export function ContentTemplate({
   infoComponent,
-  form,
-  refetch,
   table,
+  filter,
   totalPage,
 }: {
   infoComponent?: ReactNode
-  form: UseFormReturn | undefined | any
-  refetch: ReactNode
-  table: ReactNode
+  table?: ReactNode
+  filter?: ReactNode
   totalPage: number
 }) {
   const mode = useSelector(getModeSlice)
@@ -31,10 +27,7 @@ export function ContentTemplate({
         })}
       >
         {/* --- Filter --- */}
-        <div className="flex items-center gap-x-32 p-32">
-          <MarketsFilter form={form} />
-          {refetch}
-        </div>
+        {filter}
         {/* --- Table --- */}
         {table}
         {/* --- Footer --- */}

@@ -1,7 +1,7 @@
 import { Refetch } from '@/components/Refetch'
 import { Table } from '@/components/Table'
 import { ContentTemplate } from '@/feature/main-layout/content-layout/content-template'
-import { MarketInfo } from '@/feature/markets'
+import { MarketInfo, MarketsFilter } from '@/feature/markets'
 import { columnsMarkets } from '@/lib/consts/dummy/Tables'
 import { marketSchema } from '@/lib/consts/schema/marketSchema'
 import { useSearch } from '@/lib/hooks/useSearch'
@@ -68,9 +68,10 @@ export default function Market() {
 
   return (
     <ContentTemplate
-      form={form}
       totalPage={totalPage}
-      refetch={<Refetch refetch={refetch} />}
+      filter={
+        <MarketsFilter form={form} refetch={<Refetch refetch={refetch} />} />
+      }
       table={
         <Table
           data={
@@ -80,7 +81,7 @@ export default function Market() {
             ) ?? []
           }
           columns={columnsMarkets}
-          containerClasses="h-full"
+          containerClasses="h-full phones:w-[calc(100vw_-_11rem)]"
           loading={isLoading || isFetching}
         />
       }
