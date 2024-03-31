@@ -1,5 +1,6 @@
 import { Card } from '@/components/Card'
 import { getModeSlice } from '@/store/reducer/stateMode'
+import clsx from 'clsx'
 import { Flame } from 'lucide-react'
 import { ReactNode } from 'react'
 import { useSelector } from 'react-redux'
@@ -9,7 +10,7 @@ export function CardHelper({
   mappingData,
 }: {
   title: string
-  mappingData: ReactNode
+  mappingData?: ReactNode
 }) {
   const mode = useSelector(getModeSlice)
 
@@ -18,7 +19,10 @@ export function CardHelper({
       variant={mode.isLight ? 'light' : 'dark'}
       color={mode?.isLight ? 'light' : 'dark'}
       radius="xl"
-      classes="col-span-4 flex flex-col gap-y-24"
+      classes={clsx('flex flex-col gap-y-24', {
+        'col-span-4': mappingData,
+        'col-span-8': !mappingData,
+      })}
     >
       <div className="flex items-center gap-x-8">
         <span className="text-[2rem] font-bold">{title}</span>
