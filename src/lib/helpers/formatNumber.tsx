@@ -21,6 +21,7 @@ export function calculateCurrency({
 }) {
   const originalFIATPrice = convertToUSD(fiatCurrency)
   const prices = originalFIATPrice * cryptoCurrency * jumlah
+
   if (prices > 1000) {
     return roundToNDecimals(prices, 0)
   } else if (prices > 100) {
@@ -31,5 +32,17 @@ export function calculateCurrency({
     return roundToNDecimals(prices, 4)
   } else {
     return roundToNDecimals(prices, 6)
+  }
+}
+
+export function convertNumberToString(number = 0) {
+  if (number >= 1000000000) {
+    return (number / 1000000000).toFixed(1) + ' B'
+  } else if (number >= 1000000) {
+    return (number / 1000000).toFixed(1) + ' M'
+  } else if (number >= 1000) {
+    return (number / 1000).toFixed(1) + ' K'
+  } else {
+    return number?.toString()
   }
 }
