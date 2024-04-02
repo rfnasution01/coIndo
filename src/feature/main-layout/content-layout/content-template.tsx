@@ -9,11 +9,13 @@ export function ContentTemplate({
   table,
   filter,
   totalPage,
+  search,
 }: {
   infoComponent?: ReactNode
   table?: ReactNode
   filter?: ReactNode
   totalPage: number
+  search?: ReactNode
 }) {
   const mode = useSelector(getModeSlice)
   return (
@@ -29,6 +31,8 @@ export function ContentTemplate({
         {/* --- Filter --- */}
         {filter}
         {/* --- Table --- */}
+        {/* --- Search --- */}
+        <div className="flex w-full justify-end px-32 pt-32">{search}</div>
         {table}
         {/* --- Footer --- */}
         <div className="flex justify-end p-32">

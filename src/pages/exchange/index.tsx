@@ -74,7 +74,13 @@ export default function Exchange() {
                         </a>
                       }
                       subLabel={
-                        <Badge variant="success">
+                        <Badge
+                          variant={
+                            Number(item?.percentTotalVolume) < 0
+                              ? 'danger'
+                              : 'success'
+                          }
+                        >
                           +
                           {roundToNDecimals(
                             Number(item?.percentTotalVolume),

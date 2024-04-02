@@ -100,7 +100,13 @@ export default function Market() {
                           item?.exchangeId,
                         )}
                         subLabel={
-                          <Badge variant="success">
+                          <Badge
+                            variant={
+                              Number(item?.percentExchangeVolume) < 0
+                                ? 'danger'
+                                : 'success'
+                            }
+                          >
                             +
                             {roundToNDecimals(
                               Number(item?.percentExchangeVolume),
