@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 
 import RootLayout from '@/App'
-import { Exchange, Homepage, Market, NotFound } from './loadables'
+import { DetailAssets, Exchange, Homepage, Market, NotFound } from './loadables'
 import RatesDataProvider from '@/lib/context/ratesContext/ratesDataProvider'
 import ExchangeDataProvider from '@/lib/context/exchangeContext/exchangeDataProvider'
 
@@ -17,6 +17,10 @@ export const router = createBrowserRouter([
       {
         path: '',
         element: <Homepage />,
+      },
+      {
+        path: 'detail',
+        element: <DetailAssets />,
       },
       {
         path: 'exchange',

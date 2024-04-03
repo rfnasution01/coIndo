@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 export default function Homepage() {
-  const { currentPage } = useSearch()
+  const { currentPage, onIdChange } = useSearch()
   const mode = useSelector(getModeSlice)
   const limit = 2000
   const offset = 0
@@ -70,6 +70,7 @@ export default function Homepage() {
           columns={columnsAssets}
           containerClasses="h-full phones:w-[calc(100vw_-_11rem)]"
           loading={isLoading || isFetching}
+          onItemClick={onIdChange}
         />
       }
       search={
